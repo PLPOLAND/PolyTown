@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5845730394395218987}
   - component: {fileID: 5845730394396219115}
   - component: {fileID: 768717488786157146}
+  - component: {fileID: 1445763376566112504}
   m_Layer: 0
   m_Name: Laka
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 5f9207305432bce46adddf6ef8ccd3b7, type: 3}
+--- !u!114 &1445763376566112504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5845730394394216491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9b27e7e4658c34fb4ac5fa626ac08a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prawdopodobienstwo: 1
+  build: 1
