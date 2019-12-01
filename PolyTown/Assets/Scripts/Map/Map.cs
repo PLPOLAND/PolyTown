@@ -15,12 +15,13 @@ public class Map : MonoBehaviour
     void Start()
     {
         mapa = new GameObject[rozmiar.x, rozmiar.y];
-        Debug.Log(laka==null);
         MapGenerator generator = new MapGenerator();
         generator.init();
         generator.addField(Fields.LAKA, ref laka);
         generator.addField(Fields.LAS, ref las);
         generator.generate(mapa,rozmiar);
+
+        Debug.Log(mapa[1,0].name);
     }
 
 

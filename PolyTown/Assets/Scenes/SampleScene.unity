@@ -279,7 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickLayer:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 512
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1168435224}
+  - component: {fileID: 1168435225}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -323,3 +324,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1168435225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168435223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a431fe91ad10741a919a645e757de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laka: {fileID: 5845730394394216491, guid: 7b79c34e5ddbc904c8cae4a3794f4468, type: 3}
+  las: {fileID: 202389949307682375, guid: f294bb3a5301bdc41bda0a9596b634ae, type: 3}
+  rozmiar: {x: 100, y: 100}

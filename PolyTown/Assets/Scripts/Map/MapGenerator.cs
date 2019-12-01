@@ -22,7 +22,7 @@ public class MapGenerator{
             for (int j = 0; j < size.y; j++)
             {
                 GameObject newobj = MonoBehaviour.Instantiate(fields[1].mesh);
-                
+                map[i,j] = newobj;
                 newobj.name = i + " " + j;
                 newobj.layer = 9;
                 // newobj.AddComponent<MeshCollider>();
