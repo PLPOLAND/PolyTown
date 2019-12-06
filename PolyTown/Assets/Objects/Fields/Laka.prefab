@@ -104,9 +104,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5845730394394216491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46b19b5c29f5aec43b5c33eaabed7280, type: 3}
+  m_Script: {fileID: 11500000, guid: bda0fc980263fba4e95599ae095c07bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prawdopodobienstwo: 1
-  build: 1
-  fieldType: 1

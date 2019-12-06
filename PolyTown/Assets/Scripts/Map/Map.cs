@@ -5,7 +5,7 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     [SerializeField]
-    GameObject[,] mapa;
+    Pole[,] mapa;
 
 
     public GameObject laka;
@@ -14,14 +14,17 @@ public class Map : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mapa = new GameObject[rozmiar.x, rozmiar.y];
+        mapa = new Pole[rozmiar.x, rozmiar.y];
         MapGenerator generator = new MapGenerator();
         generator.init();
-        generator.addField(Fields.LAKA, ref laka);
-        generator.addField(Fields.LAS, ref las);
+        generator.addField(Pole.type.LAKA, ref laka,100);
+        generator.addField(Pole.type.LAS, ref las,30);
         generator.generate(mapa,rozmiar);
-
-        Debug.Log(mapa[1,0].name);
+        
+        // Debug.Log(mapa[9,9].Left.mesh.name);
+        // Debug.Log(mapa[9,9].Up.mesh.name);
+        // Debug.Log(mapa[9,9].Down.mesh.name);
+        // Debug.Log(mapa[9,9].Right.mesh.name);
     }
 
 

@@ -18,7 +18,7 @@ public class Click : MonoBehaviour
                     Debug.LogError("Null on getting component type - Field");
                 }
                 else
-                    raycastHit.collider.GetComponent<Field>().clicked();
+                    raycastHit.collider.GetComponent<Field>().onClick();
             }
         }
     }
