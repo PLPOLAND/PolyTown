@@ -17,8 +17,8 @@ public class Map : MonoBehaviour
         mapa = new Pole[rozmiar.x, rozmiar.y];
         MapGenerator generator = new MapGenerator();
         generator.init();
-        generator.addField(Pole.type.LAKA, ref laka,100);
-        generator.addField(Pole.type.LAS, ref las,30);
+        generator.addField(Pole.type.LAKA, ref laka,100,int.MaxValue, true);
+        generator.addField(Pole.type.LAS, ref las, 40, 1000, false);
         generator.generate(mapa,rozmiar);
         
         // Debug.Log(mapa[9,9].Left.mesh.name);

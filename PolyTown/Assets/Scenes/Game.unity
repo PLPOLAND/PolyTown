@@ -338,4 +338,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laka: {fileID: 5845730394394216491, guid: 7b79c34e5ddbc904c8cae4a3794f4468, type: 3}
   las: {fileID: 202389949307682375, guid: f294bb3a5301bdc41bda0a9596b634ae, type: 3}
-  rozmiar: {x: 10, y: 10}
+  rozmiar: {x: 100, y: 100}
