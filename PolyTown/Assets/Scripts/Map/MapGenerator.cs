@@ -89,15 +89,15 @@ public class MapGenerator
             var p = pola.Dequeue();
             if (p.typ == field.type)
             {
-                Debug.Log("Ten sam typ ("+p.typ.ToString()+")");
+                // Debug.Log("Ten sam typ ("+p.typ.ToString()+")");
                 continue;
             }
             else
             {
-                Debug.Log("Inne typy, sprawdzenie trafienia...");
+                // Debug.Log("Inne typy, sprawdzenie trafienia...");
                 if (czyZmianaPola(field.prawdopodobienstwo) && field.maxIlosc>0)
                 {
-                    Debug.Log("Wylosowano TAK");
+                    // Debug.Log("Wylosowano TAK");
                     field.maxIlosc--;
                     var tmp = MonoBehaviour.Instantiate(field.mesh);
                     // mapa[p.cords.x,p.cords.y] = new Pole(tmp,field.type,field.canBeBuild,p.cords,p.mesh.name,p.mesh.layer);
@@ -124,7 +124,7 @@ public class MapGenerator
                 }
                 else
                 {
-                    Debug.Log("Wylosowano NIE");
+                    // Debug.Log("Wylosowano NIE");
                     continue;
                 }
             }

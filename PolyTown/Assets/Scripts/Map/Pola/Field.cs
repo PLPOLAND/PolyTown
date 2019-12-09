@@ -9,6 +9,7 @@ public class Field : MonoBehaviour
     }
     public void onClick(){
         Debug.Log("Kliknięto pole :" + this.name);
+        
     }
 
 }
