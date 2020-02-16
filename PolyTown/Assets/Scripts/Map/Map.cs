@@ -8,8 +8,15 @@ public class Map : MonoBehaviour
     Pole[,] mapa;
 
 
-    public GameObject laka;
-    public GameObject las;
+    public GameObject laka; //obiekt tworzący lake
+    public int szansaLaki = 100;
+    public int iloscLaki = int.MaxValue;
+    public GameObject las; //obiekt tworzący las
+    public int szansaLasu;
+    public int iloscLasu;
+    public GameObject gory; //obiekt tworzący góry
+    public int szansaGory;
+    public int iloscGor;
     public Vector2Int rozmiar = new Vector2Int(10,10);
     // Start is called before the first frame update
     void Start()
@@ -17,8 +24,9 @@ public class Map : MonoBehaviour
         mapa = new Pole[rozmiar.x, rozmiar.y];
         MapGenerator generator = new MapGenerator();
         generator.init();
-        generator.addField(Pole.type.LAKA, ref laka,100,int.MaxValue, true);
-        generator.addField(Pole.type.LAS, ref las, 40, 1000, false);
+        generator.addField(Pole.type.LAKA, ref laka,szansaLaki,iloscLaki, true);
+        generator.addField(Pole.type.LAS, ref las, szansaLasu, iloscLasu, false);
+        generator.addField(Pole.type.GORY, ref gory, szansaGory, iloscGor, false);
         generator.generate(mapa,rozmiar);
         
         // Debug.Log(mapa[9,9].Left.mesh.name);

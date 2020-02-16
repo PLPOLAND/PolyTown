@@ -15,8 +15,10 @@ public class Pole
 
     public bool canBuild;//Czy na tym polu można budować?
     public Vector2Int cords;
-    public Pole(GameObject m, type t, bool canBeBuild, Vector2Int cords, string name="", int layer=-1){
+    public Pole(GameObject m, type t, bool canBeBuild, Vector2Int cords, Vector2Int mapCords, string name="", int layer=-1){
         this.mesh = m;
+        var field = m.GetComponent("Field") as Field;
+        field.pos = mapCords;
         this.typ = t;
         this.canBuild = canBeBuild;
         this.cords = cords;
@@ -31,7 +33,6 @@ public class Pole
     }
 
     public Pole(){
-        // mesh = new GameObject();
         typ = type.NONE;
         canBuild = false;
         Debug.LogWarning("Wygenerowano Pole(). Czy napewno tego oczekiwano?");

@@ -30,16 +30,8 @@ public class MapGenerator
         {
             for (int j = 0; j < size.y; j++)
             {
-                Pole nowepole = new Pole(MonoBehaviour.Instantiate(fields[0].mesh),fields[0].type, fields[0].canBeBuild,pos,i+" " + j, 9);
-                map[i, j] = nowepole;   
-                // nowepole.mesh = MonoBehaviour.Instantiate(fields[0].mesh);
-                // nowepole.mesh.name = i + " " + j;
-                // nowepole.mesh.layer = 9;
-                // newobj.AddComponent<MeshCollider>();
-                // newobj.AddComponent<ClickOn>();
-                // var n = newobj.GetComponent<ClickOn>();
-                // n.red = red;
-                // nowepole.changePos(pos);
+                Pole nowepole = new Pole(MonoBehaviour.Instantiate(fields[0].mesh),fields[0].type, fields[0].canBeBuild,pos,new Vector2Int(i,j), i + " " + j, 9);
+                map[i, j] = nowepole;
                 pos.y += 4;
             }
             pos.y = -(size.y / 2) * 4;
@@ -67,12 +59,11 @@ public class MapGenerator
                 }
             }
         }
+        System.Random r = new System.Random((int)DateTime.Now.Ticks);
         for (int i = 1; i < fields.Count; i++)
         {
             while (fields[i].maxIlosc >= 5)
             {
-                System.Random r = new System.Random((int)DateTime.Now.Ticks);
-                
                 generateIsland(fields[i], map, size, new Vector2Int(r.Next(1,size.x-1), r.Next(1,size.y)-1));
             }   
 
@@ -89,18 +80,17 @@ public class MapGenerator
             var p = pola.Dequeue();
             if (p.typ == field.type)
             {
-                // Debug.Log("Ten sam typ ("+p.typ.ToString()+")");
                 continue;
             }
             else
             {
-                // Debug.Log("Inne typy, sprawdzenie trafienia...");
                 if (czyZmianaPola(field.prawdopodobienstwo) && field.maxIlosc>0)
                 {
-                    // Debug.Log("Wylosowano TAK");
                     field.maxIlosc--;
                     var tmp = MonoBehaviour.Instantiate(field.mesh);
-                    // mapa[p.cords.x,p.cords.y] = new Pole(tmp,field.type,field.canBeBuild,p.cords,p.mesh.name,p.mesh.layer);
+                    var tmp1 = tmp.GetComponent("Field") as Field;
+                    var tmp2 = p.mesh.GetComponent("Field") as Field;
+                    tmp1.pos = tmp2.pos;
                     p.changeMesh(tmp);
                     p.canBuild = field.canBeBuild;
                     p.typ = field.type;
@@ -124,7 +114,6 @@ public class MapGenerator
                 }
                 else
                 {
-                    // Debug.Log("Wylosowano NIE");
                     continue;
                 }
             }
@@ -135,7 +124,7 @@ public class MapGenerator
     bool czyZmianaPola(int prawdopodobienstwo){
         System.Random r = new System.Random((int)DateTime.Now.Ticks);
         var tmpNumber = r.Next(100);
-        Debug.Log(tmpNumber);
+        // Debug.Log(tmpNumber);
         if(tmpNumber <=prawdopodobienstwo)
             return true;
         else
