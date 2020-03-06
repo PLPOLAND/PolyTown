@@ -10,19 +10,23 @@ public class cameramovement : MonoBehaviour
     {
         var pos = transform.position;
         if(Input.GetKey("w")){
+            if ((pos.z + moveSpeed * Time.deltaTime) < 180)
             pos.z += moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey("s"))
         {
-            pos.z -= moveSpeed * Time.deltaTime;
+            if((pos.z - moveSpeed * Time.deltaTime) > -208 )
+                pos.z -= moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey("a"))
         {
-            pos.x -= moveSpeed * Time.deltaTime;
+            if ((pos.x - moveSpeed * Time.deltaTime) > -180)
+                pos.x -= moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey("d"))
         {
-            pos.x += moveSpeed * Time.deltaTime;
+            if ((pos.x + moveSpeed * Time.deltaTime) < 180)
+                pos.x += moveSpeed * Time.deltaTime;
         }
         transform.position = pos;
     }
