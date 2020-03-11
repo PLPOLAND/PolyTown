@@ -8,21 +8,21 @@ public class GameUI : MonoBehaviour
     public Text drewnoVal;
     public Text waterVal;
     public Text jagodyVal;
-    
+
     void Update()
     {
         Zasoby zasoby = GameObject.Find("Player").GetComponent("Zasoby") as Zasoby;
 
-        drewnoVal.text = zasoby.getDrewno().ToString();
-        waterVal.text = zasoby.getWoda().ToString();
-        jagodyVal.text = zasoby.getJagody().ToString();
+        drewnoVal.text = zasoby.getDrewno().ToString() + "/" + zasoby.getPojemnosc().ToString();
+        waterVal.text = zasoby.getWoda().ToString() + "/" + zasoby.getPojemnosc().ToString();
+        jagodyVal.text = zasoby.getJagody().ToString() + "/" + zasoby.getPojemnosc().ToString();
         if (zasoby.getWoda() < 5)
         {
-            waterVal.color = new Color(1,0,0);
+            waterVal.color = new Color(1, 0, 0);
         }
         else
         {
-            waterVal.color = new Color(0,0,0);
+            waterVal.color = new Color(1, 1, 1);
         }
         if (zasoby.getJagody() < 5)
         {
@@ -30,7 +30,7 @@ public class GameUI : MonoBehaviour
         }
         else
         {
-            jagodyVal.color = new Color(0, 0, 0);
+            jagodyVal.color = new Color(1, 1, 1);
         }
         if (zasoby.getDrewno() < 5)
         {
@@ -38,7 +38,7 @@ public class GameUI : MonoBehaviour
         }
         else
         {
-            drewnoVal.color = new Color(0, 0, 0);
+            drewnoVal.color = new Color(1, 1, 1);
         }
     }
 }
