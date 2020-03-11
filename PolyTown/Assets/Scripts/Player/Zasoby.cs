@@ -4,112 +4,86 @@ using UnityEngine;
 
 public class Zasoby : MonoBehaviour
 {
-    double maxPojemnosc;
-    double drewno;
-    double woda;
-    double jagody;
+    float maxPojemnosc;
+    float drewno;
+    float woda;
+    float jagody;
     void Start()
     {
         maxPojemnosc = 40;
         drewno = 40;
-        woda = 6;
-        jagody = 1;
+        woda = 40;
+        jagody = 40;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void setMaxPojemnosc(double newMax)
+    public void setMaxPojemnosc(float newMax)
     {
         maxPojemnosc = newMax;
     }
-    public void setDrewno(double newDrewno)
+    public void setDrewno(float newDrewno)
     {
         drewno = newDrewno;
     }
-    public void setWoda(double newWoda)
+    public void setWoda(float newWoda)
     {
         woda = newWoda;
     }
-    public void setJagody(double newJagody)
+    public void setJagody(float newJagody)
     {
         jagody = newJagody;
     }
-    public void addPojemnosc(double addMax)
+    public void addPojemnosc(float addMax)
     {
         maxPojemnosc += addMax;
+        maxPojemnosc = Mathf.Clamp(maxPojemnosc, 40, float.MaxValue);
     }
-    public void addDrewno(double addDrewno)
+    public void addDrewno(float addDrewno)
     {
         drewno += addDrewno;
-        if (drewno > maxPojemnosc)
-        {
-            drewno = maxPojemnosc;
-        }
+        drewno = Mathf.Clamp(drewno, 0, maxPojemnosc);
     }
-    public void addWoda(double addWoda){
+    public void addWoda(float addWoda){
         woda+=addWoda;
-        if (woda>maxPojemnosc)
-        {
-            woda=maxPojemnosc;
-        }
+        woda = Mathf.Clamp(woda,0, maxPojemnosc);
     }
-    public void addJagody(double addJagody)
+    public void addJagody(float addJagody)
     {
         jagody += addJagody;
-        if (jagody > maxPojemnosc)
-        {
-            jagody = maxPojemnosc;
-        }
+        jagody = Mathf.Clamp(jagody,0, maxPojemnosc);
     }
-    public void subPojemnosc(double subMax)
+    public void subPojemnosc(float subMax)
     {
         maxPojemnosc -= subMax;
-        if (maxPojemnosc < 40)
-        {
-            maxPojemnosc = 40;//ustaw minimum
-        }
+        maxPojemnosc = Mathf.Clamp(maxPojemnosc, 40, float.MaxValue);
     }
-    public void subDrewno(double subDrewno)
+    public void subDrewno(float subDrewno)
     {
         drewno -= subDrewno;
-        if (drewno > maxPojemnosc)
-        {
-            drewno = maxPojemnosc;
-        }
+        drewno = Mathf.Clamp(drewno,0, maxPojemnosc);
     }
-    public void subWoda(double subWoda)
+    public void subWoda(float subWoda)
     {
         woda -= subWoda;
-        if (woda > maxPojemnosc)
-        {
-            woda = maxPojemnosc;
-        }
+        woda = Mathf.Clamp(woda, 0, maxPojemnosc);
     }
-    public void subJagody(double subJagody)
+    public void subJagody(float subJagody)
     {
         jagody -= subJagody;
-        if (jagody > maxPojemnosc)
-        {
-            jagody = maxPojemnosc;
-        }
+        jagody = Mathf.Clamp(jagody, 0, maxPojemnosc);
     }
-    public double getPojemnosc()
+    public float getPojemnosc()
     {
         return maxPojemnosc;
     }
-    public double getDrewno()
+    public float getDrewno()
     {
         return drewno;
     }
-    public double getWoda()
+    public float getWoda()
     {
         return woda;
     }
-    public double getJagody()
+    public float getJagody()
     {
         return jagody;
     }

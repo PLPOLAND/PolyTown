@@ -11,8 +11,8 @@ public class Field : MonoBehaviour
     public void onClick(){
         // Debug.Log("Kliknięto pole :" + this.name);
         Debug.Log("Kliknięto pole z cordami: " + pos);
-        var budynki = GameObject.Find("Budynki").GetComponent("BuildingsContainer") as BuildingsContainer;
-        budynki.addBuilding(pos);
+        var spawner = GameObject.Find("SpawnerBudynkow").GetComponent("Spawner") as Spawner;
+        spawner.spawn(pos);
         
     }
 

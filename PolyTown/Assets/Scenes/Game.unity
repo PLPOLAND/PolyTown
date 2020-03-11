@@ -477,7 +477,7 @@ MonoBehaviour:
   rotSpeed: 50
   zoomSens: 20
   screenBorder: 10
-  limit: {x: 180, y: 210}
+  limit: {x: 180, y: 200}
 --- !u!1 &608981999
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,10 +701,10 @@ MonoBehaviour:
   szansaLaki: 100
   iloscLaki: 2147483647
   las: {fileID: 202389949307682375, guid: f294bb3a5301bdc41bda0a9596b634ae, type: 3}
-  szansaLasu: 40
+  szansaLasu: 30
   iloscLasu: 1000
   gory: {fileID: 6005303756929808380, guid: 4aaa1f9658261234da7651b2778afd73, type: 3}
-  szansaGory: 40
+  szansaGory: 50
   iloscGor: 500
   rozmiar: {x: 100, y: 100}
 --- !u!1 &1175684591
@@ -795,11 +795,11 @@ GameObject:
   - component: {fileID: 1238046337}
   - component: {fileID: 1238046336}
   m_Layer: 0
-  m_Name: Budynki
+  m_Name: SpawnerBudynkow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1238046336
 MonoBehaviour:
@@ -810,9 +810,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1238046335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ff70797b30b274b8c64da7ce239417, type: 3}
+  m_Script: {fileID: 11500000, guid: 34952dd5b1c89684c9e9b6052ecbb52e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dom: {fileID: 2743647714855690729, guid: 07fbb111ab1378d4a854b118e7b0ad49, type: 3}
 --- !u!4 &1238046337
 Transform:
   m_ObjectHideFlags: 0
@@ -864,7 +865,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.949951, y: 3.8100586}
+  m_AnchoredPosition: {x: 6.94989, y: 3.8100586}
   m_SizeDelta: {x: 253.03, y: 50.17}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1299537354

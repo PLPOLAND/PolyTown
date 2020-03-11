@@ -35,6 +35,8 @@ public class Map : MonoBehaviour
         // Debug.Log(mapa[9,9].Right.mesh.name);
     }
 
-
+    public Vector3 getPositionOfPole(Vector2Int pos){
+        return mapa[pos.x , pos.y].mesh.transform.position;
+    }
     
 }
