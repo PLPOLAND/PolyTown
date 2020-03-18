@@ -1,20 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class Zasoby : MonoBehaviour
+[System.Serializable]
+public class Zasoby
 {
-    float maxPojemnosc;
-    float drewno;
-    float woda;
-    float jagody;
-    void Start()
-    {
-        maxPojemnosc = 40;
-        drewno = 40;
-        woda = 40;
-        jagody = 40;
-    }
+    public float maxPojemnosc;
+    public float drewno;
+    public float woda;
+    public float jagody;
+    // void Start()
+    // {
+    //     maxPojemnosc = 40;
+    //     drewno = 40;
+    //     woda = 40;
+    //     jagody = 40;
+    // }
 
     public void setMaxPojemnosc(float newMax)
     {
