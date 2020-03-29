@@ -5,13 +5,18 @@ using UnityEngine;
 public class Click : MonoBehaviour
 {
     [SerializeField]
-    private LayerMask clickLayer = 9; 
+    private LayerMask clickLayer = 9;
+    int updates = 0;
+
+
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)){
+
+        if (Input.GetMouseButtonDown(0))
+        {
             RaycastHit raycastHit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out raycastHit,Mathf.Infinity,clickLayer))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, Mathf.Infinity, clickLayer))
             {
                 if (raycastHit.collider.GetComponent<Field>() == null)
                 {
@@ -21,13 +26,22 @@ public class Click : MonoBehaviour
                     raycastHit.collider.GetComponent<Field>().onClick();
             }
         }
-        else{
-            RaycastHit raycastHit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, Mathf.Infinity, clickLayer))
+        else
+        {
+            if (updates > 2)
             {
+                RaycastHit raycastHit;
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, Mathf.Infinity, clickLayer))
+                {
                     raycastHit.collider.GetComponent<Field>().highLight();
+                }
+                updates = 0;
+            }
+            else
+            {
+                updates++;
             }
         }
     }
-    
+
 }
