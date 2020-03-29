@@ -9,6 +9,9 @@ public class cameramovement : MonoBehaviour
     public float zoomSens = 10f;
     public float screenBorder = 10f;
     public Vector2 limit = new Vector2(10, 10);
+    public bool mauseMovment = false;
+
+
     private Transform cameraTransform;
     private Vector2 MouseIn
     {
@@ -25,7 +28,9 @@ public class cameramovement : MonoBehaviour
     void Update()
     {
         move();
-        mouseMove();
+        if (mauseMovment){
+            mouseMove();
+        }
         clampPos();
         zoom();
     }
@@ -42,6 +47,10 @@ public class cameramovement : MonoBehaviour
             keyboardInput.x = -1;
         if (Input.GetKey("d"))
             keyboardInput.x = 1;
+        if (Input.GetKey("left shift")){
+            keyboardInput.x *= 2;
+            keyboardInput.y *= 2;
+        }
 
         if (Input.GetKey("q"))
         {
@@ -85,7 +94,7 @@ public class cameramovement : MonoBehaviour
                Mathf.Clamp(cameraTransform.position.z, (-limit.y - cameraTransform.position.y), (limit.y + cameraTransform.position.y)));
     }
     void zoom(){
-        float zoomPos = Scroll * Time.deltaTime * zoomSens * 50;
+        float zoomPos = -Scroll * Time.deltaTime * zoomSens * 50;
         float targetHeight = Mathf.Clamp(cameraTransform.position.y + zoomPos, 5, 200);
         cameraTransform.position = new Vector3(cameraTransform.position.x,targetHeight,cameraTransform.position.z);
     }

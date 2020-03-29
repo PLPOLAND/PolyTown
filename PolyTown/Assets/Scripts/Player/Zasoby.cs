@@ -17,7 +17,16 @@ public class Zasoby
     //     woda = 40;
     //     jagody = 40;
     // }
+    public Zasoby(){
 
+    }
+
+    public Zasoby(float maxPojemnosc, float drewno, float woda, float jagody){
+        this.maxPojemnosc = maxPojemnosc;
+        this.drewno = drewno;
+        this.woda = woda;
+        this.jagody = jagody;
+    }
     public void setMaxPojemnosc(float newMax)
     {
         maxPojemnosc = newMax;
@@ -89,4 +98,28 @@ public class Zasoby
     {
         return jagody;
     }
+
+    public void add(Zasoby zasobyAdd){
+        addPojemnosc(zasobyAdd.maxPojemnosc);
+        addDrewno(zasobyAdd.drewno);
+        addWoda(zasobyAdd.woda);
+        addJagody(zasobyAdd.jagody);
+    }
+    public void sub(Zasoby zasobySub){
+        subPojemnosc(zasobySub.maxPojemnosc);
+        subDrewno(zasobySub.drewno);
+        subWoda(zasobySub.woda);
+        subJagody(zasobySub.jagody);
+    }
+    public bool isOkToSub(Zasoby zasobyAdd){
+        bool ok = true;
+        if (drewno - zasobyAdd.drewno < 0)
+            ok = false;
+        if (woda - zasobyAdd.woda < 0)
+            ok = false;
+        if (jagody - zasobyAdd.jagody < 0)
+            ok = false;
+        return ok;
+    }
+
 }

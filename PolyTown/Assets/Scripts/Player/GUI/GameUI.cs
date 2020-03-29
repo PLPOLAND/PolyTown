@@ -11,7 +11,7 @@ public class GameUI : MonoBehaviour
     Zasoby zasoby;
     private void Start() {
         Player player = GameObject.Find("Player").GetComponent("Player") as Player;
-        zasoby = player.zasoby_Poczatkowe;   
+        zasoby = player.zasoby;   
     }
     void Update()
     {

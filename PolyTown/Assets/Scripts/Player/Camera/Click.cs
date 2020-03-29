@@ -21,6 +21,13 @@ public class Click : MonoBehaviour
                     raycastHit.collider.GetComponent<Field>().onClick();
             }
         }
+        else{
+            RaycastHit raycastHit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, Mathf.Infinity, clickLayer))
+            {
+                    raycastHit.collider.GetComponent<Field>().highLight();
+            }
+        }
     }
     
 }

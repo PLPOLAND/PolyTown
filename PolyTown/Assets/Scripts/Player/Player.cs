@@ -5,6 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public Zasoby zasoby_Poczatkowe;
-    
+    public Zasoby zasoby;
+
 }

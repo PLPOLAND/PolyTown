@@ -92,7 +92,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1173254599316853754}
-  - component: {fileID: -946064172246923251}
   - component: {fileID: -4991080163087909938}
   m_Layer: 0
   m_Name: dom1
@@ -118,18 +117,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-946064172246923251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2743647714855690729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc289a6ecf5fdc840ad42fa3b9423475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-4991080163087909938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +129,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ee441a57ca3f4fb8b6f30a44cd19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onTime: 2
+  zasobyCykliczne:
+    maxPojemnosc: 0
+    drewno: 0
+    woda: -1
+    jagody: -1
+  "zasobyPocz\u0105tkowe":
+    maxPojemnosc: 0
+    drewno: 2
+    woda: 0
+    jagody: 0
 --- !u!1 &6933299237179267973
 GameObject:
   m_ObjectHideFlags: 0

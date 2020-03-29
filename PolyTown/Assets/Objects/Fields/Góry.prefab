@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7281271852335908335}
   - component: {fileID: 1753941588197212121}
   - component: {fileID: 5434659475183928096}
-  - component: {fileID: 7528057362115927624}
   - component: {fileID: 794124865286866872}
+  - component: {fileID: 7528057362115927624}
   m_Layer: 0
   m_Name: "G\xF3ry"
   m_TagString: Untagged
@@ -82,19 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7528057362115927624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6005303756929808380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bda0fc980263fba4e95599ae095c07bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pos: {x: 0, y: 0}
 --- !u!64 &794124865286866872
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -109,3 +96,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2658163287777559131, guid: 7c784a6b65a5e6b4581c38eae0742620, type: 3}
+--- !u!114 &7528057362115927624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6005303756929808380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bda0fc980263fba4e95599ae095c07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMaterial: {fileID: 2100000, guid: 79d6e385cafcbfa4cbf674c532326b00, type: 2}
+  haighlightMaterialCanBuild: {fileID: 2100000, guid: 2df7077ee676a784e8fc422411c2a138,
+    type: 2}
+  haighlightMaterialCannotBuild: {fileID: 2100000, guid: 825647f5c6523214a8015bb44b2584ea,
+    type: 2}
+  pos: {x: 0, y: 0}

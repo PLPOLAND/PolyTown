@@ -5,7 +5,7 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     [SerializeField]
-    Pole[,] mapa;
+    public Pole[,] mapa;
 
 
     public GameObject laka; //obiekt tworzący lake
