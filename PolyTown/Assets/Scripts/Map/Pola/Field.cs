@@ -10,7 +10,7 @@ public class Field : MonoBehaviour
     public Vector2Int pos;
     protected bool doHighlight = false;
     private int updates = 0;
-    private Renderer renderer;
+    private Renderer objRenderer;
     public Field(){
         
     }
@@ -24,21 +24,21 @@ public class Field : MonoBehaviour
         doHighlight = true;
     }
     private void Start() {
-        renderer = this.GetComponent<Renderer>();
+        objRenderer = this.GetComponent<Renderer>();
     }
     private void Update() {
         
         if (doHighlight)
         {
             if((GameObject.Find("Map").GetComponent("Map") as Map).mapa[pos.x,pos.y].canBuild)
-                renderer.material = haighlightMaterialCanBuild;
+                objRenderer.material = haighlightMaterialCanBuild;
             else
-                renderer.material = haighlightMaterialCannotBuild;
+                objRenderer.material = haighlightMaterialCannotBuild;
             doHighlight = false;
             updates = 0;
         }
         else if(updates > 2){
-            renderer.material = baseMaterial;
+            objRenderer.material = baseMaterial;
             updates = 0;
         }
         else 
