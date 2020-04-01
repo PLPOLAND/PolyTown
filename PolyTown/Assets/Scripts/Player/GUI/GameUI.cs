@@ -20,9 +20,9 @@ public class GameUI : MonoBehaviour
     }
 
     void upadateText(){
-        drewnoVal.text = zasoby.getDrewno().ToString() + "/" + zasoby.getPojemnosc().ToString();
-        waterVal.text = zasoby.getWoda().ToString() + "/" + zasoby.getPojemnosc().ToString();
-        jagodyVal.text = zasoby.getJagody().ToString() + "/" + zasoby.getPojemnosc().ToString();
+        drewnoVal.text = ((int)zasoby.getDrewno()).ToString() + "/" + ((int)zasoby.getPojemnosc()).ToString();
+        waterVal.text = ((int)zasoby.getWoda()).ToString() + "/" + ((int)zasoby.getPojemnosc()).ToString();
+        jagodyVal.text = ((int)zasoby.getJagody()).ToString() + "/" + ((int)zasoby.getPojemnosc()).ToString();
     }
     void kolorujLiczby(){
         if (zasoby.getWoda() < 5)

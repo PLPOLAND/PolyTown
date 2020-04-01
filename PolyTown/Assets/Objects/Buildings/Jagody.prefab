@@ -3649,12 +3649,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fcd2df167bc2640959a35c1bec2f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onTime: 10
+  onTime: 15
   zasobyCykliczne:
     maxPojemnosc: 0
     drewno: 0
     woda: 0
-    jagody: 2
+    jagody: 1
   "zasobyPocz\u0105tkowe":
     maxPojemnosc: 0
     drewno: 2

@@ -12,10 +12,10 @@ public class Watch : MonoBehaviour
     void Start()
     {
         time = DateTime.Now;
-        m_Object.text = time.Hour+":"+time.Minute;
+        m_Object.text = time.ToString("HH:mm");
     }
     private void Update() {
         time = DateTime.Now;
-        m_Object.text = time.Hour + ":" + time.Minute;
+        m_Object.text = time.ToString("HH:mm");
     }
 }
