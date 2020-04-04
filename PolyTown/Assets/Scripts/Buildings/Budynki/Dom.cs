@@ -10,11 +10,7 @@ public class Dom : Budynek
     }
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer>=onTime)
-        {
-            timer = 0;
-            zasobyGracza.add(zasobyCykliczne);
-        }
+       produkujZasoby();
+       
     }
 }

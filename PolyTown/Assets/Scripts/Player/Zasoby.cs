@@ -18,7 +18,10 @@ public class Zasoby
     //     jagody = 40;
     // }
     public Zasoby(){
-
+        this.maxPojemnosc = 0;
+        this.drewno = 0;
+        this.woda = 0;
+        this.jagody = 0;
     }
 
     public Zasoby(float maxPojemnosc, float drewno, float woda, float jagody){
@@ -47,20 +50,38 @@ public class Zasoby
     {
         maxPojemnosc += addMax;
         maxPojemnosc = Mathf.Clamp(maxPojemnosc, 40, float.MaxValue);
+
     }
-    public void addDrewno(float addDrewno)
+    public float addDrewno(float addDrewno)
     {
+        var over = 0f;
         drewno += addDrewno;
+        if (drewno > maxPojemnosc){
+            over = drewno - maxPojemnosc;
+        }
         drewno = Mathf.Clamp(drewno, 0, maxPojemnosc);
+        return over;
     }
-    public void addWoda(float addWoda){
+    public float addWoda(float addWoda){
+        var over = 0f;
         woda+=addWoda;
+        if (woda > maxPojemnosc)
+        {
+            over = woda - maxPojemnosc;
+        }
         woda = Mathf.Clamp(woda,0, maxPojemnosc);
+        return over;
     }
-    public void addJagody(float addJagody)
+    public float addJagody(float addJagody)
     {
+        var over = 0f;
         jagody += addJagody;
+        if (jagody > maxPojemnosc)
+        {
+            over = jagody - maxPojemnosc;
+        }
         jagody = Mathf.Clamp(jagody,0, maxPojemnosc);
+        return over;
     }
     public void subPojemnosc(float subMax)
     {
@@ -99,11 +120,15 @@ public class Zasoby
         return jagody;
     }
 
-    public void add(Zasoby zasobyAdd){
+    public Zasoby add(Zasoby zasobyAdd){
+        Zasoby over = new Zasoby();
+        
         addPojemnosc(zasobyAdd.maxPojemnosc);
-        addDrewno(zasobyAdd.drewno);
-        addWoda(zasobyAdd.woda);
-        addJagody(zasobyAdd.jagody);
+        over.drewno += addDrewno(zasobyAdd.drewno);
+        over.woda += addWoda(zasobyAdd.woda);
+        over.jagody += addJagody(zasobyAdd.jagody);
+
+        return over;
     }
     public void sub(Zasoby zasobySub){
         subPojemnosc(zasobySub.maxPojemnosc);
