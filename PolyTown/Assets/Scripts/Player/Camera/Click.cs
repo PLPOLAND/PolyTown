@@ -9,11 +9,17 @@ public class Click : MonoBehaviour
     private LayerMask clickLayer = 9;
     int updates = 0;
 
+    Player player;
+
+    private void Start() {
+        player = GameObject.Find("Player").GetComponent("Player") as Player;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (!czyMyszkaJestNadUI())
+        if (!czyMyszkaJestNadUI() && !player.pause)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -25,7 +31,7 @@ public class Click : MonoBehaviour
                         Debug.LogError("Null on getting component type - Field");
                     }
                     else
-                        raycastHit.collider.GetComponent<Field>().onClick();
+                        raycastHit.collider.GetComponent<Field>().onClick();//TODO Zmiana wywołania na wywoływanie metody tutaj
                 }
             }
             else

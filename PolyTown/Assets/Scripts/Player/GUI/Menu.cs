@@ -19,4 +19,13 @@ public class Menu : MonoBehaviour
     public void mainMenu(){
         SceneManager.LoadScene(0);
     }
+    public void saveGame(){
+
+    }
+    public void loadGame(){
+
+    }
+    public void options(){
+
+    }
 }

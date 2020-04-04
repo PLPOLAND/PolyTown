@@ -1,20 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * <summary>
+ * Klasa odpowiadająca za budowanie budynków.
+ * </summary>
+ */
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject dom;
+    private GameObject dom;//Dom Poziom1
     [SerializeField]
-    private GameObject jagody;
+    private GameObject jagody;//Zbieraczej jagód
     [SerializeField]
-    private GameObject drwal;
+    private GameObject drwal;//Hata Drwala
     [SerializeField]
-    private GameObject woda;
-    private GameObject active;
-    public bool isActive = false;
-    protected Zasoby zasoby_gracza;
+    private GameObject woda; //Studnia
+
+    private GameObject active; //Aktualnie wybrany obiekt do budowy
+    public bool isActive = false; //wskaźnik czy aktualnie użytkownik ma zamiar budować.
+    protected Zasoby zasoby_gracza; //Odnośnik do obiektu przechowującego 
     private void Start()
     {
         zasoby_gracza = (GameObject.Find("Player").GetComponent("Player") as Player).zasoby;
@@ -24,9 +29,15 @@ public class Spawner : MonoBehaviour
         {
             active = null;
         }
-        if (Input.GetKey("escape"))
+        if (Input.GetKeyDown("escape"))
         {
             isActive = false;
+        }
+        if(Input.GetKeyDown(",")){
+            active.transform.RotateAround(new Vector3(), Vector3.up, 90f);
+        }
+        if (Input.GetKeyDown(".")){
+            active.transform.RotateAround(new Vector3(), Vector3.up, -90f);
         }
     }
     public void spawn(Vector2Int pozycja)

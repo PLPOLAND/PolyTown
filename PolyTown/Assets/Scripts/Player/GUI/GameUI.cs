@@ -2,33 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameUI : MonoBehaviour
 {
-    public Text drewnoVal;
-    public Text waterVal;
-    public Text jagodyVal;
+    public TextMeshProUGUI drewnoVal;
+    public TextMeshProUGUI waterVal;
+    public TextMeshProUGUI jagodyVal;
     Zasoby zasoby;
     public GameObject panel;
-    bool pause = false;
+    Player player;
     private void Start() {
-        Player player = GameObject.Find("Player").GetComponent("Player") as Player;
-        zasoby = player.zasoby;   
+        player = GameObject.Find("Player").GetComponent("Player") as Player;
+        zasoby = player.zasoby;
     }
     void Update()
     {
         upadateZasobyText();
         kolorujLiczby();
         if (Input.GetKeyDown("escape")){
-            if (!pause){
+            if (!player.pause){
                 gamePause();
                 panel.SetActive(true);
-                pause = true;
+                player.pause = true;
             }
             else{
                 gamePlay();
                 panel.SetActive(false);
-                pause = false;
+                player.pause = false;
             }
         }
     }
