@@ -8,12 +8,8 @@ public class Field : MonoBehaviour
     public Material haighlightMaterialCanBuild;
     public Material haighlightMaterialCannotBuild;
     public Vector2Int pos;
-    protected bool doHighlight = false;
-    private int updates = 0;
     private Renderer objRenderer;
-    public Field(){
-        
-    }
+    private static Map map;
     public void onClick(){
         Debug.Log("Kliknięto pole z cordami: " + pos);
         var spawner = GameObject.Find("SpawnerBudynkow").GetComponent("Spawner") as Spawner;
@@ -21,27 +17,20 @@ public class Field : MonoBehaviour
         
     }
     public void highLight(){
-        doHighlight = true;
+        if (map.mapa[pos.x, pos.y].canBuild)
+            objRenderer.material = haighlightMaterialCanBuild;
+        else
+            objRenderer.material = haighlightMaterialCannotBuild;
+    }
+    public void clearHighLight(){
+        objRenderer.material = baseMaterial;
     }
     private void Start() {
         objRenderer = this.GetComponent<Renderer>();
-    }
-    private void Update() {
-        
-        if (doHighlight)
+        if (map == null)
         {
-            if((GameObject.Find("Map").GetComponent("Map") as Map).mapa[pos.x,pos.y].canBuild)
-                objRenderer.material = haighlightMaterialCanBuild;
-            else
-                objRenderer.material = haighlightMaterialCannotBuild;
-            doHighlight = false;
-            updates = 0;
+            map = GameObject.Find("Map").GetComponent<Map>();
         }
-        else if(updates > 2){
-            objRenderer.material = baseMaterial;
-            updates = 0;
-        }
-        else 
-            updates++;
     }
+
 }

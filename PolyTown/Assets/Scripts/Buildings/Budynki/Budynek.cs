@@ -10,7 +10,7 @@ public class Budynek : MonoBehaviour
     public Zasoby zasobyPoczątkowe;//zasoby pobierane podczas stawiania budynku
     protected float timer = 0f;
     protected Zasoby zasobyGracza;
-    protected Zasoby magazynWewnetrzny;
+    protected Zasoby magazynWewnetrzny = new Zasoby();
     protected float timerWewnetrzny= 0f;
     protected void init(){
          zasobyGracza = (GameObject.Find("Player").GetComponent("Player") as Player).zasoby;

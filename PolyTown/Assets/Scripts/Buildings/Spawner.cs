@@ -18,59 +18,139 @@ public class Spawner : MonoBehaviour
     private GameObject woda; //Studnia
 
     private GameObject active; //Aktualnie wybrany obiekt do budowy
+    private GameObject wizualizer; //Aktualnie wybrany obiekt do budowy
     public bool isActive = false; //wskaźnik czy aktualnie użytkownik ma zamiar budować.
     protected Zasoby zasoby_gracza; //Odnośnik do obiektu przechowującego 
+    protected Map map;
+    protected Field activeField;
     private void Start()
     {
-        zasoby_gracza = (GameObject.Find("Player").GetComponent("Player") as Player).zasoby;
+        zasoby_gracza = GameObject.Find("Player").GetComponent<Player>().zasoby;
+        map = GameObject.Find("Map").GetComponent<Map>();
     }
-    private void Update() {
+    private void Update()
+    {
+        if (Input.GetKeyDown("escape") || Input.GetMouseButtonDown(1))
+        {
+            isActive = false;
+            if(activeField!=null)
+                activeField.clearHighLight();
+            activeField = null;
+            GameObject.Find("DolnyPanel").GetComponent<Select>().deselectAll();
+        }
         if (isActive == false)
         {
             active = null;
+            MonoBehaviour.Destroy(wizualizer);
         }
-        if (Input.GetKeyDown("escape"))
+        if (Input.GetKeyDown(","))
         {
-            isActive = false;
+            active.transform.RotateAround(active.transform.position, Vector3.up, 90f);
+            wizualizer.transform.RotateAround(wizualizer.transform.position, Vector3.up, 90f);
         }
-        if(Input.GetKeyDown(",")){
-            active.transform.RotateAround(new Vector3(), Vector3.up, 90f);
-        }
-        if (Input.GetKeyDown(".")){
-            active.transform.RotateAround(new Vector3(), Vector3.up, -90f);
+        if (Input.GetKeyDown("."))
+        {
+            active.transform.RotateAround(active.transform.position, Vector3.up, -90f);
+            wizualizer.transform.RotateAround(wizualizer.transform.position, Vector3.up, -90f);
         }
     }
     public void spawn(Vector2Int pozycja)
     {
-
-        var zasobyDoOdjęciaNaStart = (active.GetComponent("Budynek") as Budynek).zasobyPoczątkowe;
-        if (zasoby_gracza.isOkToSub(zasobyDoOdjęciaNaStart))
-        {
-            var okToBuild = (GameObject.Find("Map").GetComponent("Map") as Map).mapa[pozycja.x, pozycja.y].canBuild;
-            if (okToBuild)
+        if(active){
+            var zasobyDoOdjęciaNaStart = (active.GetComponent("Budynek") as Budynek).zasobyPoczątkowe;
+            if (zasoby_gracza.isOkToSub(zasobyDoOdjęciaNaStart))
             {
-                var budynek = MonoBehaviour.Instantiate(active);
-                budynek.transform.position = (GameObject.Find("Map").GetComponent("Map") as Map).getPositionOfPole(pozycja);
-                zasoby_gracza.sub(zasobyDoOdjęciaNaStart);
-                (GameObject.Find("Map").GetComponent("Map") as Map).mapa[pozycja.x, pozycja.y].canBuild = false;
+                var okToBuild = map.mapa[pozycja.x, pozycja.y].canBuild;
+                if (okToBuild)
+                {
+                    var budynek = MonoBehaviour.Instantiate(active);
+                    budynek.transform.position = map.getPositionOfPole(pozycja);
+                    zasoby_gracza.sub(zasobyDoOdjęciaNaStart);
+                    map.mapa[pozycja.x, pozycja.y].canBuild = false;
+                }
             }
         }
     }
 
     public void setJagody(){
-        isActive = true;
-        active = jagody;
+        if (wizualizer != null)
+            MonoBehaviour.Destroy(wizualizer);//Zniszcz obecną instancje wizualizowanego obiekty
+        isActive = true; 
+        active = jagody; // przypisz nowy obiekt do spawnowania
+        wizualizer = MonoBehaviour.Instantiate(jagody); // Stwórz nowy obiekt wizualicyjny
+        setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
+        wizualizer.GetComponent<ZbieraczeJagod>().enabled = false; // dla obiektu wizualizacyjnego wyłącz działanie skryptu z zasobami
     }
     public void setDom(){
-        isActive = true;
-        active = dom;
+        if (wizualizer != null)
+            MonoBehaviour.Destroy(wizualizer);//Zniszcz obecną instancje wizualizowanego obiekty
+        isActive = true; 
+        active = dom; // przypisz nowy obiekt do spawnowania
+        wizualizer = MonoBehaviour.Instantiate(dom); // Stwórz nowy obiekt wizualicyjny
+        setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
+        wizualizer.GetComponent<Dom>().enabled = false; // dla obiektu wizualizacyjnego wyłącz działanie skryptu z zasobami
     }
     public void setWoda(){
-        isActive = true;
-        active = woda;
+        if (wizualizer != null)
+            MonoBehaviour.Destroy(wizualizer); //Zniszcz obecną instancje wizualizowanego obiekty
+        isActive = true; 
+        active = woda; // przypisz nowy obiekt do spawnowania
+        wizualizer = MonoBehaviour.Instantiate(woda); // Stwórz nowy obiekt wizualicyjny
+        setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
+        wizualizer.GetComponent<Studnia>().enabled = false; // dla obiektu wizualizacyjnego wyłącz działanie skryptu z zasobami
     }
     public void setDrwal(){
-        isActive = true;
-        active = drwal;
+        if (wizualizer != null)
+            MonoBehaviour.Destroy(wizualizer);//Zniszcz obecną instancje wizualizowanego obiekty
+        isActive = true; 
+        active = drwal; // przypisz nowy obiekt do spawnowania
+        wizualizer = MonoBehaviour.Instantiate(drwal); // Stwórz nowy obiekt wizualicyjny
+        setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
+        wizualizer.GetComponent<Drwal>().enabled = false; // dla obiektu wizualizacyjnego wyłącz działanie skryptu z zasobami
     }
+    /**
+     * <summary>
+     * Ustawia nowe aktywne pole. Dba o podświetlanie i anulowanie podświetlenia
+     * </summary>
+     * <param name="field"></param>
+     */
+    public void setActiveField(Field field){
+        if (activeField != field || activeField == null)
+        {
+            if(activeField != null)
+                activeField.clearHighLight();//usuń podświetlenie poprzednie pola
+            activeField = field; //ustaw nowe pole na które jest skierowana myszka
+            activeField.highLight(); //podświetl pole
+            setPositionOfWizualizer(); //przesuń model poglądowy na nowe miejsce;
+        }
+    }
+    /**
+     * <summary>
+     * Ustawia pozycję obiektu wizualizowanego na pozycje pola. Pozycja jest pobierana z pola zawartego w Map.
+     * </summary>
+     * <param name="pozycja"></param>
+     */
+    public void setPositionOfWizualizer(Vector2Int pozycja){
+        if (active != null)
+        {
+            wizualizer.transform.position = map.getPositionOfPole(pozycja);
+        }
+    }
+    /**
+     * <summary>
+     * Ustawia pozycje obiektu wizualizacyjnego na pozycje aktywnego pola. Jeśli nie ma aktywnego pola ustawia pozycje (teoretycznie)po za widokiem 
+     * </summary>
+     */
+    public void setPositionOfWizualizer(){
+        if (active != null && activeField != null)
+        {
+            wizualizer.transform.position = map.getPositionOfPole(activeField.pos);
+        }
+        else if (active != null)
+        {
+            wizualizer.transform.position = new Vector3(1000000,1000000,1000000);
+        }
+    }
+
+
 }

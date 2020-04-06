@@ -2523,7 +2523,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.6872734, b: 0.6273585, a: 1}
+  m_Color: {r: 1, g: 0.9191579, b: 0.904, a: 1}
   m_Intensity: 2
   m_Range: 2.08
   m_SpotAngle: 30
@@ -3238,8 +3238,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2682312625194622073}
-  - component: {fileID: 8345464637168120552}
   - component: {fileID: 3462154296755204296}
+  - component: {fileID: 8345464637168120552}
   m_Layer: 0
   m_Name: Jagody
   m_TagString: Untagged
@@ -3254,8 +3254,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396719275562217066}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -4, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 977782820534371802}
@@ -3264,6 +3264,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3462154296755204296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396719275562217066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fcd2df167bc2640959a35c1bec2f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTime: 15
+  zasobyCykliczne:
+    maxPojemnosc: 0
+    drewno: 0
+    woda: 0
+    jagody: 1
+  "zasobyPocz\u0105tkowe":
+    maxPojemnosc: 0
+    drewno: 2
+    woda: 0
+    jagody: 0
 --- !u!205 &8345464637168120552
 LODGroup:
   m_ObjectHideFlags: 0
@@ -3637,29 +3660,6 @@ LODGroup:
     - renderer: {fileID: 1447744923601601965}
     - renderer: {fileID: 2105243566747381978}
   m_Enabled: 1
---- !u!114 &3462154296755204296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396719275562217066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05fcd2df167bc2640959a35c1bec2f7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onTime: 15
-  zasobyCykliczne:
-    maxPojemnosc: 0
-    drewno: 0
-    woda: 0
-    jagody: 1
-  "zasobyPocz\u0105tkowe":
-    maxPojemnosc: 0
-    drewno: 2
-    woda: 0
-    jagody: 0
 --- !u!1 &1412691866663702839
 GameObject:
   m_ObjectHideFlags: 0

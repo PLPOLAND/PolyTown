@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+/**
+ * <summary>
+ * Odpowiada za kliknięna myszą nad planszą
+ * </summary>
+ */
 public class Click : MonoBehaviour
 {
     [SerializeField]
     private LayerMask clickLayer = 9;
-    int updates = 0;
+    int updates = 0; // optymalizacja do raycast
 
-    Player player;
+    Player player; //klasa gracza
+    Spawner spawner; //spawner budunków
 
     private void Start() {
-        player = GameObject.Find("Player").GetComponent("Player") as Player;
+        player = GameObject.Find("Player").GetComponent<Player>();
+        spawner = GameObject.Find("SpawnerBudynkow").GetComponent<Spawner>();
     }
-
-
-    // Update is called once per frame
     void Update()
     {
         if (!czyMyszkaJestNadUI() && !player.pause)
@@ -31,7 +34,7 @@ public class Click : MonoBehaviour
                         Debug.LogError("Null on getting component type - Field");
                     }
                     else
-                        raycastHit.collider.GetComponent<Field>().onClick();//TODO Zmiana wywołania na wywoływanie metody tutaj
+                        spawner.spawn(raycastHit.collider.GetComponent<Field>().pos);
                 }
             }
             else
@@ -41,7 +44,7 @@ public class Click : MonoBehaviour
                     RaycastHit raycastHit;
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, Mathf.Infinity, clickLayer))
                     {
-                        raycastHit.collider.GetComponent<Field>().highLight();
+                        spawner.setActiveField(raycastHit.collider.GetComponent<Field>());
                     }
                     updates = 0;
                 }
@@ -52,7 +55,12 @@ public class Click : MonoBehaviour
             }    
         }
     }
-
+    /**
+     * <summary>
+     * Sprawdza czy myszka znajduje się nad UI
+     * </summary>
+     * <returns>bool</returns>
+     */
     public bool czyMyszkaJestNadUI(){
         PointerEventData eventData = new PointerEventData(EventSystem.current);
         eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);

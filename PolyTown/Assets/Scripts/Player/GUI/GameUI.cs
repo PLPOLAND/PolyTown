@@ -10,7 +10,8 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI waterVal;
     public TextMeshProUGUI jagodyVal;
     Zasoby zasoby;
-    public GameObject panel;
+    public GameObject gameMenuPanel;
+
     Player player;
     private void Start() {
         player = GameObject.Find("Player").GetComponent("Player") as Player;
@@ -23,12 +24,12 @@ public class GameUI : MonoBehaviour
         if (Input.GetKeyDown("escape")){
             if (!player.pause){
                 gamePause();
-                panel.SetActive(true);
+                gameMenuPanel.SetActive(true);
                 player.pause = true;
             }
             else{
                 gamePlay();
-                panel.SetActive(false);
+                gameMenuPanel.SetActive(false);
                 player.pause = false;
             }
         }
