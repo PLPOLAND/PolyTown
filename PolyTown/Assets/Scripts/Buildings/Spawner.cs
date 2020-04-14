@@ -9,20 +9,20 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject dom;//Dom Poziom1
+    private GameObject dom = null;//Dom Poziom1
     [SerializeField]
-    private GameObject jagody;//Zbieraczej jagód
+    private GameObject jagody = null;//Zbieraczej jagód
     [SerializeField]
-    private GameObject drwal;//Hata Drwala
+    private GameObject drwal = null;//Hata Drwala
     [SerializeField]
-    private GameObject woda; //Studnia
+    private GameObject woda = null; //Studnia
 
-    private GameObject active; //Aktualnie wybrany obiekt do budowy
-    private GameObject wizualizer; //Aktualnie wybrany obiekt do budowy
+    private GameObject active = null; //Aktualnie wybrany obiekt do budowy
+    private GameObject wizualizer = null; //Aktualnie wybrany obiekt do budowy
     public bool isActive = false; //wskaźnik czy aktualnie użytkownik ma zamiar budować.
-    protected Zasoby zasoby_gracza; //Odnośnik do obiektu przechowującego 
-    protected Map map;
-    protected Field activeField;
+    protected Zasoby zasoby_gracza = null; //Odnośnik do obiektu przechowującego 
+    protected Map map = null;
+    protected Field activeField = null; 
     private void Start()
     {
         zasoby_gracza = GameObject.Find("Player").GetComponent<Player>().zasoby;
@@ -63,10 +63,14 @@ public class Spawner : MonoBehaviour
                 var okToBuild = map.mapa[pozycja.x, pozycja.y].canBuild;
                 if (okToBuild)
                 {
-                    var budynek = MonoBehaviour.Instantiate(active);
-                    budynek.transform.position = map.getPositionOfPole(pozycja);
-                    zasoby_gracza.sub(zasobyDoOdjęciaNaStart);
-                    map.mapa[pozycja.x, pozycja.y].canBuild = false;
+                    if (active.GetComponent<Budynek>().finder.znajdź(pozycja))
+                    {
+                        var budynek = MonoBehaviour.Instantiate(active);
+                        budynek.transform.position = map.getPositionOfPole(pozycja);
+                        zasoby_gracza.sub(zasobyDoOdjęciaNaStart);
+                        map.mapa[pozycja.x, pozycja.y].canBuild = false;
+                        budynek.GetComponent<Budynek>().pozycjaNaMapie = pozycja;
+                    }
                 }
             }
         }

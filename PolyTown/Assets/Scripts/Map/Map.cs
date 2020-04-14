@@ -38,5 +38,9 @@ public class Map : MonoBehaviour
     public Vector3 getPositionOfPole(Vector2Int pos){
         return mapa[pos.x , pos.y].mesh.transform.position;
     }
+
+    public Pole getPole(Vector2Int pos){
+        return mapa[pos.x, pos.y];
+    }
     
 }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class Watch : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI m_Object;
+    [SerializeField] TextMeshProUGUI m_Object = null;
 
     DateTime time;
     void Start()

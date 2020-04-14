@@ -10,13 +10,6 @@ public class Zasoby
     public float drewno;
     public float woda;
     public float jagody;
-    // void Start()
-    // {
-    //     maxPojemnosc = 40;
-    //     drewno = 40;
-    //     woda = 40;
-    //     jagody = 40;
-    // }
     public Zasoby(){
         this.maxPojemnosc = 0;
         this.drewno = 0;

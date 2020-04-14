@@ -346,7 +346,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 3.0092666e-36, y: 1.009742e-28, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 3e-45, z: 3.762e-42, w: 1.01e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712840fe80733214baf2fb4ee7d358fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Object: {fileID: 491912821}
+  objDocelowy: {fileID: 491912821}
 --- !u!114 &491912821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2915,7 +2915,6 @@ GameObject:
   - component: {fileID: 1094985571}
   - component: {fileID: 1094985570}
   - component: {fileID: 1094985569}
-  - component: {fileID: 1094985572}
   m_Layer: 5
   m_Name: WodaButton
   m_TagString: Untagged
@@ -3055,19 +3054,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094985567}
   m_CullTransparentMesh: 0
---- !u!114 &1094985572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094985567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b68586c39688ec143947d5aae3984603, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons: []
 --- !u!1 &1101493501
 GameObject:
   m_ObjectHideFlags: 0

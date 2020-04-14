@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Select : MonoBehaviour
 {
-    public Button[] buttons;
+    public Button[] buttons = new Button[4];
 
     private ColorBlock normalColor;
     private ColorBlock selectedColor;

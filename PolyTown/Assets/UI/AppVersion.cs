@@ -5,9 +5,9 @@ using TMPro;
 
 public class AppVersion : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI m_Object;
+    [SerializeField] TextMeshProUGUI objDocelowy = null;
         void Start()
     {
-        m_Object.text = "v " + Application.version;
+        objDocelowy.text = "v " + Application.version;
     }
 }

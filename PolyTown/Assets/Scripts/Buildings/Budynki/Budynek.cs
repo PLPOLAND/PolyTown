@@ -12,6 +12,8 @@ public class Budynek : MonoBehaviour
     protected Zasoby zasobyGracza;
     protected Zasoby magazynWewnetrzny = new Zasoby();
     protected float timerWewnetrzny= 0f;
+    public Vector2Int pozycjaNaMapie;
+    public ResourceFinder finder;
     protected void init(){
          zasobyGracza = (GameObject.Find("Player").GetComponent("Player") as Player).zasoby;
     }
@@ -20,7 +22,7 @@ public class Budynek : MonoBehaviour
         if (timer >= onTime)
         {
             timer = 0;
-            wyslijDoMagazynuWewnetrzenego(zasobyGracza.add(zasobyCykliczne));
+            wyslijDoMagazynuWewnetrzenego(zasobyGracza.add(zasobyCykliczne));//do magazynu wewnetrznego trafia nadmiar, który jest zwracany przez metodę add
         }
     }
     protected void wyslijDoMagazynuWewnetrzenego(Zasoby zasoby){
