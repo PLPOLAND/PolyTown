@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Dom : Budynek
 {
-    
     private void Start() {
         init();
     }

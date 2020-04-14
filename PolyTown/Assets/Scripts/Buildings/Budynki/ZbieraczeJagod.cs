@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZbieraczeJagod : Dom
+public class ZbieraczeJagod : Budynek
 {
     private void Start()
     {
@@ -10,11 +10,6 @@ public class ZbieraczeJagod : Dom
     }
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= onTime)
-        {
-            timer = 0;
-            zasobyGracza.add(zasobyCykliczne);
-        }
+        produkujZasoby();
     }
 }
