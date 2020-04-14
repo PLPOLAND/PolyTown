@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 586021691}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -72,7 +72,7 @@ LightmapSettings:
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
-    m_BakeBackend: 2
+    m_BakeBackend: 1
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 512
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712840fe80733214baf2fb4ee7d358fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Object: {fileID: 22727551}
+  objDocelowy: {fileID: 22727551}
 --- !u!1 &51300390
 GameObject:
   m_ObjectHideFlags: 0
@@ -3571,7 +3571,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
@@ -4531,7 +4531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191123047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00062, y: -0.019, z: 0.01234}
+  m_LocalPosition: {x: -0.00062, y: -0.02076, z: 0.01234}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1745333243}
@@ -4550,7 +4550,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.8135679, b: 0, a: 1}
   m_Intensity: 3
-  m_Range: 2
+  m_Range: 1.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4594,7 +4594,7 @@ Light:
   m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 8, y: 0, z: 0, w: 1e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -8361,6 +8361,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drwal
       objectReference: {fileID: 0}
+    - target: {fileID: 5086098515512244468, guid: 64a3df83821f48e49b7b1c851f21ad06,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.036
+      objectReference: {fileID: 0}
     - target: {fileID: 7426939689861946017, guid: 64a3df83821f48e49b7b1c851f21ad06,
         type: 3}
       propertyPath: m_Enabled
@@ -8376,6 +8381,21 @@ PrefabInstance:
       propertyPath: m_DrawHalo
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7426939689861946017, guid: 64a3df83821f48e49b7b1c851f21ad06,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7426939689861946017, guid: 64a3df83821f48e49b7b1c851f21ad06,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -2.7641686e-27
+      objectReference: {fileID: 0}
+    - target: {fileID: 7426939689861946017, guid: 64a3df83821f48e49b7b1c851f21ad06,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8634965146475000658, guid: 64a3df83821f48e49b7b1c851f21ad06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8384,7 +8404,7 @@ PrefabInstance:
     - target: {fileID: 8634965146475000658, guid: 64a3df83821f48e49b7b1c851f21ad06,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8634965146475000658, guid: 64a3df83821f48e49b7b1c851f21ad06,
         type: 3}
@@ -8459,7 +8479,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820713535}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.00766, y: 0.01431, z: 0.00745}
+  m_LocalPosition: {x: -0.00682, y: 0.01431, z: 0.00745}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1745333243}
@@ -8522,7 +8542,7 @@ Light:
   m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 1.3699e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -9634,7 +9654,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -9673,10 +9693,10 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: NaN}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
-  m_ShadowAngle: 0
+  m_ShadowAngle: 0.1
 --- !u!4 &2134617322
 Transform:
   m_ObjectHideFlags: 0
