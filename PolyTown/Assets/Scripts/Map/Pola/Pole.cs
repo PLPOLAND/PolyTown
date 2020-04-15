@@ -12,6 +12,7 @@ public class Pole
 
     public GameObject mesh;
     public type typ;
+    public GameObject budynek = null;//budynek postawiony na danym polu
 
     public bool canBuild;//Czy na tym polu można budować?
     public Vector2Int cords;
@@ -50,13 +51,24 @@ public class Pole
         tmp.z += newpos.y;
         this.mesh.transform.position = tmp;
     }
-
+    /// <summary>
+    /// Zmienia kształt odpowiadający za dane pole
+    /// </summary>
+    /// <param name="mesh">nowy kształt</param>
     public void changeMesh(GameObject mesh){
         mesh.name = this.mesh.name;//ustaw stara nazwe
         mesh.layer = this.mesh.layer;//ustaw stara warstwe
         mesh.transform.position = this.mesh.transform.position;//ustaw stara pozycje
         MonoBehaviour.Destroy(this.mesh);//usuń stary mesh
         this.mesh=mesh;//przypisz nowy mesh
+    }
+    /// <summary>
+    /// Sprawdza czy przypisano budynek do danego pola
+    /// </summary>
+    public bool posiadaBudynek(){
+        if (budynek != null)
+            return true;
+        return false;
     }
 
     /// <summary>

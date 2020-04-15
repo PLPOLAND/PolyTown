@@ -6,12 +6,16 @@ using UnityEngine;
 public class ResourceFinder
 {
     [SerializeField]
-    Pole.type doZnalezienia = Pole.type.NONE;
+    Pole.type doZnalezieniaPole = Pole.type.NONE; // powinno być ustawione jeśli szukamy przez pole
+    [SerializeField]
+    BudynekType doZnalezieniaBudynek = BudynekType.NONE;// powinno być ustawione jeśli szukamy przez budynek
 
     [SerializeField]
     int promien = 1;
 
     Map mapa = null;
+    [SerializeField]
+    TypSzukania typSzukania;
 
     void init()
     {
@@ -20,24 +24,34 @@ public class ResourceFinder
     }
     public bool znajdź(Vector2Int pozycja)
     {
-        if (doZnalezienia == Pole.type.NONE)//nie szukamy jeśli nie sprecyzowano szukanego pola z zasobami
+        if (typSzukania == TypSzukania.NONE)//nie chciano aby szukać to nie szukamy
+        {
             return true;
-        init();
+        }
+
+        init(); //inicjalizujemy
+        
         bool znaleziono = false;
 
         Pole poleStartowe = mapa.getPole(pozycja);
         int movesToDo = promien;
-
-        znaleziono = sprawdzRozgalezienia(movesToDo, poleStartowe, poleStartowe);
+        if (typSzukania == TypSzukania.POLE)
+        {
+            znaleziono = sprawdzRozgalezieniaPole(movesToDo, poleStartowe, poleStartowe);
+        }
+        else
+        {
+            znaleziono = sprawdzRozgalezieniaBudynek(movesToDo, poleStartowe, poleStartowe);
+        }
 
         Debug.Log("Czy znaleziono: " + znaleziono);
 
         return znaleziono;
     }
-    bool sprawdzRozgalezienia(int moves, Pole next, Pole curr)
+    bool sprawdzRozgalezieniaPole(int moves, Pole next, Pole curr)
     {
         
-        if (next.Up.typ == doZnalezienia && next.Up != curr || next.Down.typ == doZnalezienia && next.Down != curr || next.Left.typ == doZnalezienia && next.Left != curr || next.Right.typ == doZnalezienia && next.Right != curr)
+        if (next.Up.typ == doZnalezieniaPole && next.Up != curr || next.Down.typ == doZnalezieniaPole && next.Down != curr || next.Left.typ == doZnalezieniaPole && next.Left != curr || next.Right.typ == doZnalezieniaPole && next.Right != curr)
             return true;
         else
         {
@@ -46,16 +60,16 @@ public class ResourceFinder
                 return false;
 
             bool tmp = false;
-            tmp = sprawdzRozgalezienia(moves, next.Up,next);
+            tmp = sprawdzRozgalezieniaPole(moves, next.Up,next);
             if (tmp == true)
                 return true;
-            tmp = sprawdzRozgalezienia(moves, next.Down,next);
+            tmp = sprawdzRozgalezieniaPole(moves, next.Down,next);
             if (tmp == true)
                 return true;
-            tmp = sprawdzRozgalezienia(moves, next.Left,next);
+            tmp = sprawdzRozgalezieniaPole(moves, next.Left,next);
             if (tmp == true)
                 return true;
-            tmp = sprawdzRozgalezienia(moves, next.Right,next);
+            tmp = sprawdzRozgalezieniaPole(moves, next.Right,next);
             return tmp;
 
         }
@@ -65,10 +79,10 @@ public class ResourceFinder
     /// </summary>
     /// <param name="moves">pozostała ilość ruchów</param>
     /// <param name="next"> pole do sprawdzenia</param>
-    bool sprawdzRozgalezieniaVis(int moves, Pole next, Pole curr)
+    bool sprawdzRozgalezieniaPoleVis(int moves, Pole next, Pole curr)
     {
         Debug.Log(next.cords.ToString());
-        if (next.Up.typ == doZnalezienia && next.Up != curr)
+        if (next.Up.typ == doZnalezieniaPole && next.Up != curr)
         {
             next.Up.mesh.GetComponent<Renderer>().material.color = new Color(0,1,0,1);
             return true;
@@ -76,7 +90,7 @@ public class ResourceFinder
         else{
             next.Up.mesh.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
         }
-        if (next.Down.typ == doZnalezienia && next.Down != curr)
+        if (next.Down.typ == doZnalezieniaPole && next.Down != curr)
         {
             next.Down.mesh.GetComponent<Renderer>().material.color = new Color(0,1,0,1);
             return true;
@@ -84,7 +98,7 @@ public class ResourceFinder
         else{
             next.Down.mesh.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
         }
-        if (next.Left.typ == doZnalezienia && next.Left != curr)
+        if (next.Left.typ == doZnalezieniaPole && next.Left != curr)
         {
             next.Left.mesh.GetComponent<Renderer>().material.color = new Color(0,1,0,1);
             return true;
@@ -92,7 +106,7 @@ public class ResourceFinder
         else{
             next.Left.mesh.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
         }
-        if (next.Right.typ == doZnalezienia && next.Right != curr)
+        if (next.Right.typ == doZnalezieniaPole && next.Right != curr)
         {
             next.Right.mesh.GetComponent<Renderer>().material.color = new Color(0,1,0,1);
             return true;
@@ -106,16 +120,110 @@ public class ResourceFinder
             return false;
 
         bool tmp = false;
-        tmp = sprawdzRozgalezieniaVis(moves, next.Up, curr);
+        tmp = sprawdzRozgalezieniaPoleVis(moves, next.Up, curr);
         if (tmp == true)
             return true;
-        tmp = sprawdzRozgalezieniaVis(moves, next.Down, curr);
+        tmp = sprawdzRozgalezieniaPoleVis(moves, next.Down, curr);
         if (tmp == true)
             return true;
-        tmp = sprawdzRozgalezieniaVis(moves, next.Left, curr);
+        tmp = sprawdzRozgalezieniaPoleVis(moves, next.Left, curr);
         if (tmp == true)
             return true;
-        tmp = sprawdzRozgalezieniaVis(moves, next.Right, curr);
+        tmp = sprawdzRozgalezieniaPoleVis(moves, next.Right, curr);
         return tmp;
+    }
+    bool sprawdzRozgalezieniaBudynek(int moves, Pole next, Pole curr)
+    {
+        
+        if (next.Up.budynek != null && next.Up.budynek.GetComponent<Budynek>().typ == doZnalezieniaBudynek && next.Up != curr || next.Down.budynek != null && next.Down.budynek.GetComponent<Budynek>().typ == doZnalezieniaBudynek&& next.Down != curr || next.Left.budynek != null && next.Left.budynek.GetComponent<Budynek>().typ == doZnalezieniaBudynek && next.Left != curr || next.Right.budynek != null && next.Right.budynek.GetComponent<Budynek>().typ == doZnalezieniaBudynek && next.Right !=curr)
+            return true;
+        else
+        {
+            moves--;
+            if (moves == 0)
+                return false;
+
+            bool tmp = false;
+            tmp = sprawdzRozgalezieniaBudynek(moves, next.Up,next);
+            if (tmp == true)
+                return true;
+            tmp = sprawdzRozgalezieniaBudynek(moves, next.Down,next);
+            if (tmp == true)
+                return true;
+            tmp = sprawdzRozgalezieniaBudynek(moves, next.Left,next);
+            if (tmp == true)
+                return true;
+            tmp = sprawdzRozgalezieniaBudynek(moves, next.Right,next);
+            return tmp;
+
+        }
+    }
+    /// <summary>
+    /// Wizualizacja sprawdzania rozgałęzień
+    /// </summary>
+    /// <param name="moves">pozostała ilość ruchów</param>
+    /// <param name="next"> pole do sprawdzenia</param>
+    bool sprawdzRozgalezieniaBudynekVis(int moves, Pole next, Pole curr)
+    {
+        Debug.Log(next.cords.ToString());
+        if (next.Up.budynek != null && next.Up.budynek.GetComponent<Budynek>().typ == doZnalezieniaBudynek && next.Up != curr)
+        {
+            next.Up.mesh.GetComponent<Renderer>().material.color = new Color(0,1,0,1);
+            return true;
+        }
+        else{
+            next.Up.mesh.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
+        }
+
+        if (next.Down.budynek != null && next.Down.budynek.GetComponent<Budynek>().typ == doZnalezieniaBudynek && next.Down != curr)
+        {
+            next.Down.mesh.GetComponent<Renderer>().material.color = new Color(0,1,0,1);
+            return true;
+        }
+        else{
+            next.Down.mesh.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
+        }
+
+        if (next.Left.budynek != null && next.Left.budynek.GetComponent<Budynek>().typ == doZnalezieniaBudynek && next.Left != curr)
+        {
+            next.Left.mesh.GetComponent<Renderer>().material.color = new Color(0,1,0,1);
+            return true;
+        }
+        else{
+            next.Left.mesh.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
+        }
+
+        if (next.Right.budynek != null && next.Right.budynek.GetComponent<Budynek>().typ == doZnalezieniaBudynek && next.Right != curr)
+        {
+            next.Right.mesh.GetComponent<Renderer>().material.color = new Color(0,1,0,1);
+            return true;
+        }
+        else{
+            next.Right.mesh.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
+        }
+        
+        moves--;
+        if (moves == 0)
+            return false;
+
+        bool tmp = false;
+        tmp = sprawdzRozgalezieniaBudynekVis(moves, next.Up, curr);
+        if (tmp == true)
+            return true;
+        tmp = sprawdzRozgalezieniaBudynekVis(moves, next.Down, curr);
+        if (tmp == true)
+            return true;
+        tmp = sprawdzRozgalezieniaBudynekVis(moves, next.Left, curr);
+        if (tmp == true)
+            return true;
+        tmp = sprawdzRozgalezieniaBudynekVis(moves, next.Right, curr);
+        return tmp;
+    }
+
+    public enum TypSzukania
+    {
+        NONE,
+        POLE,
+        BUDYNEK
     }
 }

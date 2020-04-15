@@ -3287,6 +3287,22 @@ MonoBehaviour:
     drewno: 2
     woda: 0
     jagody: 0
+  magazynWewnetrzny:
+    maxPojemnosc: 10
+    drewno: 0
+    woda: 0
+    jagody: 0
+  onTimeMagazyn: 8
+  doPobraniaZmagazynu:
+    maxPojemnosc: 0
+    drewno: 0
+    woda: 0
+    jagody: 1
+  pozycjaNaMapie: {x: 0, y: 0}
+  finder:
+    doZnalezienia: 0
+    promien: 1
+  typ: 3
 --- !u!205 &8345464637168120552
 LODGroup:
   m_ObjectHideFlags: 0

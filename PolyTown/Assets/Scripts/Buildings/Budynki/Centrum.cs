@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZbieraczeJagod : Budynek
+public class Centrum : Budynek
 {
     private void Start()
     {
@@ -11,6 +11,5 @@ public class ZbieraczeJagod : Budynek
     void Update()
     {
         produkujZasoby();
-        wyslijZMagazynu();
     }
 }

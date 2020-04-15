@@ -123,8 +123,29 @@ public class Zasoby
 
         return over;
     }
+    /// <summary>
+    /// Dodaj zasoby bez pojemnosci
+    /// </summary>
+    public Zasoby addNPojemnosc(Zasoby zasobyAdd){
+        Zasoby over = new Zasoby();
+
+        over.drewno += addDrewno(zasobyAdd.drewno);
+        over.woda += addWoda(zasobyAdd.woda);
+        over.jagody += addJagody(zasobyAdd.jagody);
+
+        return over;
+    }
     public void sub(Zasoby zasobySub){
         subPojemnosc(zasobySub.maxPojemnosc);
+        subDrewno(zasobySub.drewno);
+        subWoda(zasobySub.woda);
+        subJagody(zasobySub.jagody);
+    }
+    /// <summary>
+    /// Odejmuje zasoby bez pojemnosci
+    /// </summary>
+    /// <param name="zasobySub"></param>
+    public void subNPojemnosc(Zasoby zasobySub){
         subDrewno(zasobySub.drewno);
         subWoda(zasobySub.woda);
         subJagody(zasobySub.jagody);
@@ -139,5 +160,43 @@ public class Zasoby
             ok = false;
         return ok;
     }
+    public bool isFull(ZasobTyp typ){
+        switch(typ){
+            case ZasobTyp.NONE:
+                return false;
+            case ZasobTyp.WODA:
+                if (woda == maxPojemnosc)
+                    return true;
+                return false;
+            case ZasobTyp.DREWNO:
+                if (drewno == maxPojemnosc)
+                    return true;
+                return false;
+            case ZasobTyp.JAGODY:
+                if (jagody == maxPojemnosc)
+                    return true;
+                return false;
+            default: 
+            return false;
+        }
+    }
 
+    public bool isOkToAdd(Zasoby zasobyAdd){
+        bool ok = true;
+        if (drewno + zasobyAdd.drewno > maxPojemnosc)
+            ok = false;
+        if (woda + zasobyAdd.woda > maxPojemnosc)
+            ok = false;
+        if (jagody + zasobyAdd.jagody > maxPojemnosc)
+            ok = false;
+        return ok;
+
+    }
+    public enum ZasobTyp
+    {
+        NONE,
+        WODA,
+        DREWNO,
+        JAGODY
+    }
 }

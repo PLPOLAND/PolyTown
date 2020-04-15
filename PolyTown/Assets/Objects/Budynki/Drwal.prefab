@@ -53,7 +53,7 @@ MonoBehaviour:
   onTime: 15
   zasobyCykliczne:
     maxPojemnosc: 0
-    drewno: 1.5
+    drewno: 1
     woda: 0
     jagody: 0
   "zasobyPocz\u0105tkowe":
@@ -61,10 +61,24 @@ MonoBehaviour:
     drewno: 2
     woda: 0
     jagody: 0
+  magazynWewnetrzny:
+    maxPojemnosc: 10
+    drewno: 0
+    woda: 0
+    jagody: 0
+  onTimeMagazyn: 8
+  doPobraniaZmagazynu:
+    maxPojemnosc: 0
+    drewno: 1
+    woda: 0
+    jagody: 0
   pozycjaNaMapie: {x: 0, y: 0}
   finder:
-    doZnalezienia: 2
+    doZnalezieniaPole: 2
+    doZnalezieniaBudynek: 0
     promien: 2
+    typSzukania: 1
+  typ: 2
 --- !u!205 &632068309977926512
 LODGroup:
   m_ObjectHideFlags: 0

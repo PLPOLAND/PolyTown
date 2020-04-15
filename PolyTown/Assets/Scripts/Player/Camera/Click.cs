@@ -15,10 +15,12 @@ public class Click : MonoBehaviour
 
     Player player; //klasa gracza
     Spawner spawner; //spawner budunków
+    SzczegolyBudynku szczegolyBudynku; //UI szczegółów budynku
 
     private void Start() {
         player = GameObject.Find("Player").GetComponent<Player>();
         spawner = GameObject.Find("SpawnerBudynkow").GetComponent<Spawner>();
+        szczegolyBudynku = GameObject.Find("Szczegoly Budynku").GetComponent<SzczegolyBudynku>();
     }
     void Update()
     {
@@ -29,17 +31,20 @@ public class Click : MonoBehaviour
                 RaycastHit raycastHit;
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, Mathf.Infinity, clickLayer))
                 {
+                    Debug.Log(raycastHit.collider.gameObject.name);
                     if (raycastHit.collider.GetComponent<Field>() == null)
                     {
-                        Debug.LogError("Null on getting component type - Field");
+                        Debug.LogError("Kliknięto na nie obsługiwany obiekt!");
                     }
-                    else
-                        spawner.spawn(raycastHit.collider.GetComponent<Field>().pos);
+                    else if(raycastHit.collider.GetComponent<Field>() != null){
+                        spawner.onClick(raycastHit.collider.GetComponent<Field>().pos);
+                        Debug.Log("Field");
+                    }
                 }
             }
             else
             {
-                if (updates > 2 && GameObject.Find("SpawnerBudynkow").GetComponent<Spawner>().isActive)
+                if (updates > 2 && spawner.isSpawn)
                 {
                     RaycastHit raycastHit;
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, Mathf.Infinity, clickLayer))

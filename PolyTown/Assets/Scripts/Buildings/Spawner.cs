@@ -16,10 +16,17 @@ public class Spawner : MonoBehaviour
     private GameObject drwal = null;//Hata Drwala
     [SerializeField]
     private GameObject woda = null; //Studnia
+    [SerializeField]
+    private GameObject centurm = null; //Studnia
+    [SerializeField]
+    private GameObject magazyn = null; //Studnia
+    [SerializeField]
+    private GameObject szczegolyLink = null;
 
     private GameObject active = null; //Aktualnie wybrany obiekt do budowy
     private GameObject wizualizer = null; //Aktualnie wybrany obiekt do budowy
-    public bool isActive = false; //wskaźnik czy aktualnie użytkownik ma zamiar budować.
+    public bool isSpawn = false; //wskaźnik czy aktualnie użytkownik ma zamiar budować.
+    public bool isDel = false; // wskaźnik czy aktualnie użytkownik ma zamiar usuwać. TODO.
     protected Zasoby zasoby_gracza = null; //Odnośnik do obiektu przechowującego 
     protected Map map = null;
     protected Field activeField = null; 
@@ -32,14 +39,16 @@ public class Spawner : MonoBehaviour
     {
         if (Input.GetKeyDown("escape") || Input.GetMouseButtonDown(1))
         {
-            isActive = false;
-            if(activeField!=null)
-                activeField.clearHighLight();
-            activeField = null;
+            isSpawn = false;
+            isDel = false;
+            szczegolyLink.SetActive(false);
             GameObject.Find("DolnyPanel").GetComponent<Select>().deselectAll();
         }
-        if (isActive == false)
+        if (isSpawn == false)
         {
+            if (activeField != null)
+                activeField.clearHighLight();
+            activeField = null;
             active = null;
             MonoBehaviour.Destroy(wizualizer);
         }
@@ -54,32 +63,49 @@ public class Spawner : MonoBehaviour
             wizualizer.transform.RotateAround(wizualizer.transform.position, Vector3.up, -90f);
         }
     }
-    public void spawn(Vector2Int pozycja)
+    public void onClick(Vector2Int pozycja)
     {
-        if(active){
-            var zasobyDoOdjęciaNaStart = (active.GetComponent("Budynek") as Budynek).zasobyPoczątkowe;
-            if (zasoby_gracza.isOkToSub(zasobyDoOdjęciaNaStart))
+        Debug.Log(isDel);
+        if(isSpawn){
+            spawn(pozycja);
+        }
+        else if(isDel){
+            Debug.Log("Delete");
+            MonoBehaviour.Destroy(map.mapa[pozycja.x, pozycja.y].budynek);
+            map.mapa[pozycja.x, pozycja.y].budynek = null;
+        }
+        else if(map.mapa[pozycja.x, pozycja.y].posiadaBudynek())
+        {
+            szczegolyLink.SetActive(true);
+            szczegolyLink.GetComponent<SzczegolyBudynku>().onClick(map.mapa[pozycja.x, pozycja.y].budynek);
+        }
+    }
+    public bool spawn(Vector2Int pozycja){
+        var zasobyDoOdjęciaNaStart = (active.GetComponent("Budynek") as Budynek).zasobyPoczątkowe;
+        if (zasoby_gracza.isOkToSub(zasobyDoOdjęciaNaStart))
+        {
+            var okToBuild = map.mapa[pozycja.x, pozycja.y].canBuild;
+            if (okToBuild)
             {
-                var okToBuild = map.mapa[pozycja.x, pozycja.y].canBuild;
-                if (okToBuild)
+                if (active.GetComponent<Budynek>().finder.znajdź(pozycja))
                 {
-                    if (active.GetComponent<Budynek>().finder.znajdź(pozycja))
-                    {
-                        var budynek = MonoBehaviour.Instantiate(active);
-                        budynek.transform.position = map.getPositionOfPole(pozycja);
-                        zasoby_gracza.sub(zasobyDoOdjęciaNaStart);
-                        map.mapa[pozycja.x, pozycja.y].canBuild = false;
-                        budynek.GetComponent<Budynek>().pozycjaNaMapie = pozycja;
-                    }
+                    var budynek = MonoBehaviour.Instantiate(active);
+                    budynek.transform.position = map.getPositionOfPole(pozycja);
+                    zasoby_gracza.sub(zasobyDoOdjęciaNaStart);
+                    map.mapa[pozycja.x, pozycja.y].canBuild = false;
+                    map.mapa[pozycja.x, pozycja.y].budynek = budynek;
+                    budynek.GetComponent<Budynek>().pozycjaNaMapie = pozycja;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     public void setJagody(){
         if (wizualizer != null)
             MonoBehaviour.Destroy(wizualizer);//Zniszcz obecną instancje wizualizowanego obiekty
-        isActive = true; 
+        isSpawn = true; 
         active = jagody; // przypisz nowy obiekt do spawnowania
         wizualizer = MonoBehaviour.Instantiate(jagody); // Stwórz nowy obiekt wizualicyjny
         setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
@@ -88,7 +114,7 @@ public class Spawner : MonoBehaviour
     public void setDom(){
         if (wizualizer != null)
             MonoBehaviour.Destroy(wizualizer);//Zniszcz obecną instancje wizualizowanego obiekty
-        isActive = true; 
+        isSpawn = true; 
         active = dom; // przypisz nowy obiekt do spawnowania
         wizualizer = MonoBehaviour.Instantiate(dom); // Stwórz nowy obiekt wizualicyjny
         setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
@@ -97,7 +123,7 @@ public class Spawner : MonoBehaviour
     public void setWoda(){
         if (wizualizer != null)
             MonoBehaviour.Destroy(wizualizer); //Zniszcz obecną instancje wizualizowanego obiekty
-        isActive = true; 
+        isSpawn = true; 
         active = woda; // przypisz nowy obiekt do spawnowania
         wizualizer = MonoBehaviour.Instantiate(woda); // Stwórz nowy obiekt wizualicyjny
         setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
@@ -106,11 +132,33 @@ public class Spawner : MonoBehaviour
     public void setDrwal(){
         if (wizualizer != null)
             MonoBehaviour.Destroy(wizualizer);//Zniszcz obecną instancje wizualizowanego obiekty
-        isActive = true; 
+        isSpawn = true; 
         active = drwal; // przypisz nowy obiekt do spawnowania
         wizualizer = MonoBehaviour.Instantiate(drwal); // Stwórz nowy obiekt wizualicyjny
         setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
         wizualizer.GetComponent<Drwal>().enabled = false; // dla obiektu wizualizacyjnego wyłącz działanie skryptu z zasobami
+    }
+    public void setMagazyn(){
+        if (wizualizer != null)
+            MonoBehaviour.Destroy(wizualizer);//Zniszcz obecną instancje wizualizowanego obiekty
+        isSpawn = true; 
+        active = magazyn; // przypisz nowy obiekt do spawnowania
+        wizualizer = MonoBehaviour.Instantiate(magazyn); // Stwórz nowy obiekt wizualicyjny
+        setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
+        wizualizer.GetComponent<Magazyn>().enabled = false; // dla obiektu wizualizacyjnego wyłącz działanie skryptu z zasobami
+    }
+    public void setCentrum(){
+        if (wizualizer != null)
+            MonoBehaviour.Destroy(wizualizer);//Zniszcz obecną instancje wizualizowanego obiekty
+        isSpawn = true; 
+        active = centurm; // przypisz nowy obiekt do spawnowania
+        wizualizer = MonoBehaviour.Instantiate(centurm); // Stwórz nowy obiekt wizualicyjny
+        setPositionOfWizualizer(); //ustaw odpowiednia pozycje obiektu wizualizacyjnego
+        wizualizer.GetComponent<Centrum>().enabled = false; // dla obiektu wizualizacyjnego wyłącz działanie skryptu z zasobami
+    }
+    public void setDeleteMode(){
+        isSpawn = false;
+        isDel = true;
     }
     /**
      * <summary>

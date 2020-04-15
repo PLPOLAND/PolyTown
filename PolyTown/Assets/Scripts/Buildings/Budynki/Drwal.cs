@@ -11,5 +11,6 @@ public class Drwal : Budynek
     void Update()
     {
         produkujZasoby();
+        wyslijZMagazynu();
     }
 }

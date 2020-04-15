@@ -10,10 +10,17 @@ public class Field : MonoBehaviour
     public Vector2Int pos;
     private Renderer objRenderer;
     private static Map map;
+    private void Start() {
+        objRenderer = this.GetComponent<Renderer>();
+        if (map == null)
+        {
+            map = GameObject.Find("Map").GetComponent<Map>();
+        }
+    }
     public void onClick(){
         Debug.Log("Kliknięto pole z cordami: " + pos);
         var spawner = GameObject.Find("SpawnerBudynkow").GetComponent("Spawner") as Spawner;
-        spawner.spawn(pos);
+        spawner.onClick(pos);
         
     }
     public void highLight(){
@@ -24,13 +31,6 @@ public class Field : MonoBehaviour
     }
     public void clearHighLight(){
         objRenderer.material = baseMaterial;
-    }
-    private void Start() {
-        objRenderer = this.GetComponent<Renderer>();
-        if (map == null)
-        {
-            map = GameObject.Find("Map").GetComponent<Map>();
-        }
     }
 
 }

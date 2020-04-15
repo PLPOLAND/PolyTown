@@ -11,5 +11,6 @@ public class Studnia : Budynek
     void Update()
     {
         produkujZasoby();
+        wyslijZMagazynu();
     }
 }

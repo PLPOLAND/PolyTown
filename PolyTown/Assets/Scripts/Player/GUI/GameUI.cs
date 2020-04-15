@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class GameUI : MonoBehaviour
 {
     public TextMeshProUGUI drewnoVal;
@@ -11,6 +12,7 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI jagodyVal;
     Zasoby zasoby;
     public GameObject gameMenuPanel;
+    public GameObject szczegolyBudynkuPanel;
 
     Player player;
     private void Start() {
@@ -32,6 +34,7 @@ public class GameUI : MonoBehaviour
                 gameMenuPanel.SetActive(false);
                 player.pause = false;
             }
+            szczegolyBudynkuPanel.SetActive(false);
         }
     }
 
