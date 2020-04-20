@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI drewnoVal;
     public TextMeshProUGUI waterVal;
     public TextMeshProUGUI jagodyVal;
+    public TextMeshProUGUI pieniadzeVal;
     Zasoby zasoby;
     public GameObject gameMenuPanel;
     public GameObject szczegolyBudynkuPanel;
@@ -39,9 +40,10 @@ public class GameUI : MonoBehaviour
     }
 
     void upadateZasobyText(){
-        drewnoVal.text = ((int)zasoby.getDrewno()).ToString() + "/" + ((int)zasoby.getPojemnosc()).ToString();
-        waterVal.text = ((int)zasoby.getWoda()).ToString() + "/" + ((int)zasoby.getPojemnosc()).ToString();
-        jagodyVal.text = ((int)zasoby.getJagody()).ToString() + "/" + ((int)zasoby.getPojemnosc()).ToString();
+        drewnoVal.text = ((int)zasoby.getDrewno()).ToString();
+        waterVal.text = ((int)zasoby.getWoda()).ToString();
+        jagodyVal.text = ((int)zasoby.getJagody()).ToString();
+        pieniadzeVal.text = zasoby.getPieniadze().ToString()+"$";
     }
     void kolorujLiczby(){
         if (zasoby.getWoda() < 5)
@@ -61,6 +63,14 @@ public class GameUI : MonoBehaviour
             jagodyVal.color = new Color(1, 1, 1);
         }
         if (zasoby.getDrewno() < 5)
+        {
+            drewnoVal.color = new Color(1, 0, 0);
+        }
+        else
+        {
+            drewnoVal.color = new Color(1, 1, 1);
+        }
+        if (zasoby.getPieniadze() < 0)
         {
             drewnoVal.color = new Color(1, 0, 0);
         }

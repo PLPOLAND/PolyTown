@@ -31,14 +31,14 @@ public class Click : MonoBehaviour
                 RaycastHit raycastHit;
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, Mathf.Infinity, clickLayer))
                 {
-                    Debug.Log(raycastHit.collider.gameObject.name);
+                    // Debug.Log(raycastHit.collider.gameObject.name);
                     if (raycastHit.collider.GetComponent<Field>() == null)
                     {
                         Debug.LogError("Kliknięto na nie obsługiwany obiekt!");
                     }
                     else if(raycastHit.collider.GetComponent<Field>() != null){
                         spawner.onClick(raycastHit.collider.GetComponent<Field>().pos);
-                        Debug.Log("Field");
+                        // Debug.Log("Field");
                     }
                 }
             }

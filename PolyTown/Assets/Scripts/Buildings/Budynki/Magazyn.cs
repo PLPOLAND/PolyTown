@@ -10,6 +10,6 @@ public class Magazyn : Budynek
     }
     void Update()
     {
-        produkujZasoby();
+        czynsz();
     }
 }

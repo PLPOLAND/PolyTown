@@ -24,15 +24,15 @@ public class SzczegolyBudynku : MonoBehaviour
     void Update()
     {
         if(magazynWewnetrzny != null){
-            wartosciPol_link[0].text = ((int)magazynWewnetrzny.jagody).ToString() + " / " + magazynWewnetrzny.maxPojemnosc;
-            wartosciPol_link[1].text = ((int)magazynWewnetrzny.woda).ToString() + " / " + magazynWewnetrzny.maxPojemnosc;
-            wartosciPol_link[2].text = ((int)magazynWewnetrzny.drewno).ToString() + " / " + magazynWewnetrzny.maxPojemnosc;
+            wartosciPol_link[0].text = ((int)magazynWewnetrzny.getJagody()).ToString() + " / " + magazynWewnetrzny.getPojemnosc();
+            wartosciPol_link[1].text = ((int)magazynWewnetrzny.getWoda()).ToString() + " / " + magazynWewnetrzny.getPojemnosc();
+            wartosciPol_link[2].text = ((int)magazynWewnetrzny.getDrewno()).ToString() + " / " + magazynWewnetrzny.getPojemnosc();
         }
         else
         {
-            wartosciPol_link[0].text = "0 / " + magazynWewnetrzny.maxPojemnosc;
-            wartosciPol_link[1].text = "0 / " + magazynWewnetrzny.maxPojemnosc;
-            wartosciPol_link[2].text = "0 / " + magazynWewnetrzny.maxPojemnosc;
+            wartosciPol_link[0].text = "0 / " + magazynWewnetrzny.getPojemnosc();
+            wartosciPol_link[1].text = "0 / " + magazynWewnetrzny.getPojemnosc();
+            wartosciPol_link[2].text = "0 / " + magazynWewnetrzny.getPojemnosc();
         }
     }
 

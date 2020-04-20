@@ -6,22 +6,30 @@ using UnityEngine.Serialization;
 [System.Serializable]
 public class Zasoby
 {
-    public float maxPojemnosc;
-    public float drewno;
-    public float woda;
-    public float jagody;
+    [SerializeField]
+    private float maxPojemnosc;
+    [SerializeField]
+    private float drewno;
+    [SerializeField]
+    private float woda;
+    [SerializeField]
+    private float jagody;
+    [SerializeField]
+    private float pieniadze;
     public Zasoby(){
         this.maxPojemnosc = 0;
         this.drewno = 0;
         this.woda = 0;
         this.jagody = 0;
+        this.pieniadze = 0;
     }
 
-    public Zasoby(float maxPojemnosc, float drewno, float woda, float jagody){
+    public Zasoby(float maxPojemnosc, float drewno, float woda, float jagody, float pieniadze){
         this.maxPojemnosc = maxPojemnosc;
         this.drewno = drewno;
         this.woda = woda;
         this.jagody = jagody;
+        this.pieniadze = pieniadze;
     }
     public void setMaxPojemnosc(float newMax)
     {
@@ -38,6 +46,9 @@ public class Zasoby
     public void setJagody(float newJagody)
     {
         jagody = newJagody;
+    }
+    public void setPieniadze(float newPieniadze){
+        pieniadze = newPieniadze;
     }
     public void addPojemnosc(float addMax)
     {
@@ -76,6 +87,15 @@ public class Zasoby
         jagody = Mathf.Clamp(jagody,0, maxPojemnosc);
         return over;
     }
+    public float addPieniadze(float addPieniadze){
+        var over = 0f;
+        pieniadze += addPieniadze;
+        if (pieniadze > maxPojemnosc)
+        {
+            over = pieniadze - maxPojemnosc;
+        }
+        return over;
+    }
     public void subPojemnosc(float subMax)
     {
         maxPojemnosc -= subMax;
@@ -96,6 +116,9 @@ public class Zasoby
         jagody -= subJagody;
         jagody = Mathf.Clamp(jagody, 0, maxPojemnosc);
     }
+    public void subPieniadze(float subPieniadze){
+        pieniadze -= subPieniadze;
+    }
     public float getPojemnosc()
     {
         return maxPojemnosc;
@@ -112,7 +135,12 @@ public class Zasoby
     {
         return jagody;
     }
-
+    public float getPieniadze(){
+        return pieniadze;
+    }
+    /// <summary>
+    /// Dodaj zasoby (drewno, woda, jagody, pojemnosc)
+    /// </summary>
     public Zasoby add(Zasoby zasobyAdd){
         Zasoby over = new Zasoby();
         
@@ -120,11 +148,24 @@ public class Zasoby
         over.drewno += addDrewno(zasobyAdd.drewno);
         over.woda += addWoda(zasobyAdd.woda);
         over.jagody += addJagody(zasobyAdd.jagody);
+        return over;
+    }
 
+    /// <summary>
+    /// Dodaj zasoby (drewno, woda, jagody, pojemnosc, pieniadze)
+    /// </summary>
+    public Zasoby addWithPieniadze(Zasoby zasobyAdd){
+        Zasoby over = new Zasoby();
+        
+        addPojemnosc(zasobyAdd.maxPojemnosc);
+        over.drewno += addDrewno(zasobyAdd.drewno);
+        over.woda += addWoda(zasobyAdd.woda);
+        over.jagody += addJagody(zasobyAdd.jagody);
+        over.pieniadze += addPieniadze(zasobyAdd.pieniadze);
         return over;
     }
     /// <summary>
-    /// Dodaj zasoby bez pojemnosci
+    /// Dodaj zasoby (drewno, woda, jagody)
     /// </summary>
     public Zasoby addNPojemnosc(Zasoby zasobyAdd){
         Zasoby over = new Zasoby();
@@ -150,14 +191,34 @@ public class Zasoby
         subWoda(zasobySub.woda);
         subJagody(zasobySub.jagody);
     }
-    public bool isOkToSub(Zasoby zasobyAdd){
+    /// <summary>
+    /// Odejmuje zasoby (Drewno, Woda, Jagody, Pieniadze)
+    /// </summary>
+    public void subWithPieniadze(Zasoby zasobySub)
+    {
+        subDrewno(zasobySub.drewno);
+        subWoda(zasobySub.woda);
+        subJagody(zasobySub.jagody);
+        subPieniadze(zasobySub.pieniadze);
+    }
+
+    public bool isOkToSub(Zasoby zasobySub){
         bool ok = true;
-        if (drewno - zasobyAdd.drewno < 0)
+        if (drewno - zasobySub.drewno < 0)
             ok = false;
-        if (woda - zasobyAdd.woda < 0)
+        if (woda - zasobySub.woda < 0)
             ok = false;
-        if (jagody - zasobyAdd.jagody < 0)
+        if (jagody - zasobySub.jagody < 0)
             ok = false;
+        return ok;
+    }
+
+    public bool isOkToSubMoney(Zasoby zasobySub){
+        bool ok = true;
+        if (pieniadze - zasobySub.pieniadze < 0)
+        {
+            ok = false;
+        }
         return ok;
     }
     public bool isFull(ZasobTyp typ){

@@ -10,6 +10,6 @@ public class Centrum : Budynek
     }
     void Update()
     {
-        produkujZasoby();
+        czynsz();
     }
 }

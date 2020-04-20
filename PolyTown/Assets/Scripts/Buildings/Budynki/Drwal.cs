@@ -12,5 +12,6 @@ public class Drwal : Budynek
     {
         produkujZasoby();
         wyslijZMagazynu();
+        czynsz();
     }
 }

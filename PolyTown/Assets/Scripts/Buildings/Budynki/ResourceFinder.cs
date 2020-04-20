@@ -15,7 +15,7 @@ public class ResourceFinder
 
     Map mapa = null;
     [SerializeField]
-    TypSzukania typSzukania;
+    TypSzukania typSzukania = TypSzukania.NONE;
 
     void init()
     {

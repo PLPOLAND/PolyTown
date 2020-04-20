@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6370860702955452634}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: -0.7071068}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 539.7167, y: 261.31525, z: -85.84375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -54,15 +54,33 @@ MonoBehaviour:
     drewno: 0
     woda: 0
     jagody: 0
+    pieniadze: -5
   "zasobyPocz\u0105tkowe":
     maxPojemnosc: 0
     drewno: 10
     woda: 0
     jagody: 0
+    pieniadze: 250
+  magazynWewnetrzny:
+    maxPojemnosc: 0
+    drewno: 0
+    woda: 0
+    jagody: 0
+    pieniadze: 0
+  onTimeMagazyn: 0
+  doPobraniaZmagazynu:
+    maxPojemnosc: 0
+    drewno: 0
+    woda: 0
+    jagody: 0
+    pieniadze: 0
+  czyPobieraZasoby: 0
   pozycjaNaMapie: {x: 0, y: 0}
   finder:
-    doZnalezienia: 0
+    doZnalezieniaPole: 0
+    doZnalezieniaBudynek: 0
     promien: 0
+    typSzukania: 0
   typ: 5
 --- !u!1001 &750095556419151501
 PrefabInstance:

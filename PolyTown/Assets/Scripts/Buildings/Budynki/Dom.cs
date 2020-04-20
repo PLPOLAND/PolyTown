@@ -9,7 +9,7 @@ public class Dom : Budynek
     }
     void Update()
     {
-        produkujZasoby();
-        wyslijZMagazynu();
+        pobierzZasoby();
+        czynsz();
     }
 }

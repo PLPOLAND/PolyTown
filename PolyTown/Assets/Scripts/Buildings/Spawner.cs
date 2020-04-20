@@ -91,7 +91,7 @@ public class Spawner : MonoBehaviour
                 {
                     var budynek = MonoBehaviour.Instantiate(active);
                     budynek.transform.position = map.getPositionOfPole(pozycja);
-                    zasoby_gracza.sub(zasobyDoOdjęciaNaStart);
+                    zasoby_gracza.subWithPieniadze(zasobyDoOdjęciaNaStart);
                     map.mapa[pozycja.x, pozycja.y].canBuild = false;
                     map.mapa[pozycja.x, pozycja.y].budynek = budynek;
                     budynek.GetComponent<Budynek>().pozycjaNaMapie = pozycja;

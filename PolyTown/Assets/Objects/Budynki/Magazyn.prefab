@@ -60,25 +60,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTime: 10
+  onTimeMagazyn: 0
   zasobyCykliczne:
     maxPojemnosc: 0
     drewno: 0
     woda: 0
     jagody: 0
+    pieniadze: -10
   "zasobyPocz\u0105tkowe":
     maxPojemnosc: -20
     drewno: 20
     woda: 0
     jagody: 0
+    pieniadze: 500
   magazynWewnetrzny:
     maxPojemnosc: 0
     drewno: 0
     woda: 0
     jagody: 0
+    pieniadze: 0
+  doPobraniaZmagazynu:
+    maxPojemnosc: 0
+    drewno: 0
+    woda: 0
+    jagody: 0
+    pieniadze: 0
+  czyPobieraZasoby: 0
   pozycjaNaMapie: {x: 0, y: 0}
   finder:
-    doZnalezienia: 0
+    doZnalezieniaPole: 0
+    doZnalezieniaBudynek: 0
     promien: 1
+    typSzukania: 0
   typ: 6
 --- !u!1001 &771899746230374522
 PrefabInstance:

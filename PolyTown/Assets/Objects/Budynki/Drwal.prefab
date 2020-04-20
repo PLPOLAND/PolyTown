@@ -51,27 +51,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTime: 15
+  onTimeMagazyn: 5
   zasobyCykliczne:
     maxPojemnosc: 0
     drewno: 1
     woda: 0
     jagody: 0
+    pieniadze: -5
   "zasobyPocz\u0105tkowe":
     maxPojemnosc: 0
     drewno: 2
     woda: 0
     jagody: 0
+    pieniadze: 50
   magazynWewnetrzny:
     maxPojemnosc: 10
     drewno: 0
     woda: 0
     jagody: 0
-  onTimeMagazyn: 8
+    pieniadze: 0
   doPobraniaZmagazynu:
     maxPojemnosc: 0
     drewno: 1
     woda: 0
     jagody: 0
+    pieniadze: 0
+  czyPobieraZasoby: 0
   pozycjaNaMapie: {x: 0, y: 0}
   finder:
     doZnalezieniaPole: 2

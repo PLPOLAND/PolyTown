@@ -12,5 +12,6 @@ public class Studnia : Budynek
     {
         produkujZasoby();
         wyslijZMagazynu();
+        czynsz();
     }
 }
