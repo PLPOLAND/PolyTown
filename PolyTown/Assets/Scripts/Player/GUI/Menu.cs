@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject settingsCanva;
+    public GameObject mainMenuCanva;
     private void Start() {
         
     }
@@ -26,6 +28,7 @@ public class Menu : MonoBehaviour
 
     }
     public void options(){
-
+            mainMenuCanva.SetActive(false);
+            settingsCanva.SetActive(true);
     }
 }

@@ -82,7 +82,7 @@ public class Spawner : MonoBehaviour
     }
     public bool spawn(Vector2Int pozycja){
         var zasobyDoOdjęciaNaStart = (active.GetComponent("Budynek") as Budynek).zasobyPoczątkowe;
-        if (zasoby_gracza.isOkToSub(zasobyDoOdjęciaNaStart))
+        if (zasoby_gracza.isOkToSub(zasobyDoOdjęciaNaStart) && (zasoby_gracza.getPieniadze() - zasobyDoOdjęciaNaStart.getPieniadze()) >= 0)
         {
             var okToBuild = map.mapa[pozycja.x, pozycja.y].canBuild;
             if (okToBuild)
