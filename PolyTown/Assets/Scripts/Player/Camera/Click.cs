@@ -15,7 +15,7 @@ public class Click : MonoBehaviour
 
     Player player; //klasa gracza
     Spawner spawner; //spawner budunków
-    SzczegolyBudynku szczegolyBudynku; //UI szczegółów budynku
+    SzczegolyBudynku szczegolyBudynku = null; //UI szczegółów budynku
 
     private void Start() {
         player = GameObject.Find("Player").GetComponent<Player>();

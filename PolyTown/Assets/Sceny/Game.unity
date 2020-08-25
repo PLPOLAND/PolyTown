@@ -501,7 +501,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.2079e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 1.9058e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1083,20 +1083,20 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 367509141}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 1168435225}
+        m_MethodName: print
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: save
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &367509141
@@ -2283,6 +2283,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546012256}
   m_CullTransparentMesh: 0
+--- !u!1 &606013525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 606013527}
+  - component: {fileID: 606013526}
+  m_Layer: 0
+  m_Name: SaveMenager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &606013526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606013525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee268308732e7841adbd3b346e01128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapa: {fileID: 1168435225}
+--- !u!4 &606013527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606013525}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.034573, y: -2.9614506, z: 154.28563}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &612138335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4969,7 +5013,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110052014}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -5199,10 +5243,10 @@ MonoBehaviour:
   szansaLaki: 100
   iloscLaki: 2147483647
   las: {fileID: 202389949307682375, guid: f294bb3a5301bdc41bda0a9596b634ae, type: 3}
-  szansaLasu: 70
+  szansaLasu: 40
   iloscLasu: 1000
   gory: {fileID: 6005303756929808380, guid: 4aaa1f9658261234da7651b2778afd73, type: 3}
-  szansaGory: 90
+  szansaGory: 40
   iloscGor: 500
   rozmiar: {x: 100, y: 100}
 --- !u!1 &1238046335
@@ -6534,7 +6578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1739913560
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6606,6 +6650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204087742df0369499f0978b271387c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsCanva: {fileID: 0}
+  mainMenuCanva: {fileID: 0}
 --- !u!1 &1847244911
 GameObject:
   m_ObjectHideFlags: 0

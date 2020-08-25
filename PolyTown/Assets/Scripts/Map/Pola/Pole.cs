@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
 public class Pole
 {
     public Pole Up;
@@ -39,7 +37,7 @@ public class Pole
         Debug.LogWarning("Wygenerowano Pole(). Czy napewno tego oczekiwano?");
     }
     ~Pole(){
-        MonoBehaviour.Destroy(mesh);
+        MonoBehaviour.Destroy(this.mesh);
     }
     /// <summary>
     /// Zmiana pozycji pola(pozycja w świecie)

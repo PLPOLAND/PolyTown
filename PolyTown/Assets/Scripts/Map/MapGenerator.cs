@@ -6,6 +6,14 @@ using UnityEngine;
 public class MapGenerator
 {
 
+    System.Random r;
+
+    public MapGenerator(){//ziarno losowe
+        r = new System.Random((int)DateTime.Now.Ticks);
+    }
+    public MapGenerator(int i){//ustalone ziarno
+        r = new System.Random(i);
+    }
 
     private List<FieldType> fields;
     public void init()
@@ -32,6 +40,7 @@ public class MapGenerator
             {
                 Pole nowepole = new Pole(MonoBehaviour.Instantiate(fields[0].mesh),fields[0].type, fields[0].canBeBuild,pos,new Vector2Int(i,j), i + " " + j, 9);
                 map[i, j] = nowepole;
+                nowepole.mesh.transform.SetParent(GameObject.Find("Map").transform);
                 pos.y += 4;
             }
             pos.y = -(size.y / 2) * 4;
@@ -59,7 +68,6 @@ public class MapGenerator
                 }
             }
         }
-        System.Random r = new System.Random((int)DateTime.Now.Ticks);
         for (int i = 1; i < fields.Count; i++)
         {
             while (fields[i].maxIlosc >= 5)
@@ -91,6 +99,7 @@ public class MapGenerator
                     var tmp1 = tmp.GetComponent("Field") as Field;
                     var tmp2 = p.mesh.GetComponent("Field") as Field;
                     tmp1.pos = tmp2.pos;
+                    tmp.transform.SetParent(GameObject.Find("Map").transform);
                     p.changeMesh(tmp);
                     p.canBuild = field.canBeBuild;
                     p.typ = field.type;
@@ -122,7 +131,7 @@ public class MapGenerator
     }
     
     bool czyZmianaPola(int prawdopodobienstwo){
-        System.Random r = new System.Random((int)DateTime.Now.Ticks);
+        
         var tmpNumber = r.Next(100);
         // Debug.Log(tmpNumber);
         if(tmpNumber <=prawdopodobienstwo)

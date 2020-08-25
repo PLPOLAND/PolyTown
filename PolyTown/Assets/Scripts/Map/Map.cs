@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Map : MonoBehaviour
-{
-    [SerializeField]
+{ 
     public Pole[,] mapa;
 
 
@@ -28,13 +28,23 @@ public class Map : MonoBehaviour
         generator.addField(Pole.type.LAS, ref las, szansaLasu, iloscLasu, false);
         generator.addField(Pole.type.GORY, ref gory, szansaGory, iloscGor, false);
         generator.generate(mapa,rozmiar);
-        
-        // Debug.Log(mapa[9,9].Left.mesh.name);
-        // Debug.Log(mapa[9,9].Up.mesh.name);
-        // Debug.Log(mapa[9,9].Down.mesh.name);
-        // Debug.Log(mapa[9,9].Right.mesh.name);
     }
-
+    public void generateAgain(int seed,int sizeX, int sizeY){
+        for (int i = 0; i < mapa.GetUpperBound(0) + 1; i++)
+        {
+            for (int j = 0; j < mapa.GetUpperBound(1) + 1; j++)
+            {
+                MonoBehaviour.Destroy(mapa[i, j].mesh);//usuwanie meshy
+            }
+        }
+        mapa = new Pole[sizeX,sizeY];
+        MapGenerator generator = new MapGenerator(seed);
+        generator.init();
+        generator.addField(Pole.type.LAKA, ref laka, szansaLaki, iloscLaki, true);
+        generator.addField(Pole.type.LAS, ref las, szansaLasu, iloscLasu, false);
+        generator.addField(Pole.type.GORY, ref gory, szansaGory, iloscGor, false);
+        generator.generate(mapa, rozmiar);
+    }
     public Vector3 getPositionOfPole(Vector2Int pos){
         return mapa[pos.x , pos.y].mesh.transform.position;
     }

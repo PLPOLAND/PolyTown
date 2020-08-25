@@ -3620,6 +3620,8 @@ GameObject:
   - component: {fileID: 819216672}
   - component: {fileID: 819216671}
   - component: {fileID: 819216675}
+  - component: {fileID: 819216677}
+  - component: {fileID: 819216676}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -3724,6 +3726,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204087742df0369499f0978b271387c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsCanva: {fileID: 1003032210}
+  mainMenuCanva: {fileID: 819216670}
+--- !u!114 &819216676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819216670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: df93aa28f3cdd174d93a209ad7eb48b5, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &819216677
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819216670}
+  m_CullTransparentMesh: 0
 --- !u!4 &830524538 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 202389949307183719, guid: f294bb3a5301bdc41bda0a9596b634ae,
@@ -4941,8 +4981,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jakosc: {fileID: 1074438949}
-  settings: {fileID: 0}
-  mainMenu: {fileID: 0}
+  settings: {fileID: 1003032210}
+  mainMenu: {fileID: 819216670}
 --- !u!1 &1007315192
 GameObject:
   m_ObjectHideFlags: 0
@@ -8173,17 +8213,17 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1505116641}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 819216670}
-        m_MethodName: 
+      - m_Target: {fileID: 819216675}
+        m_MethodName: options
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

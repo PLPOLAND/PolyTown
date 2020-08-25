@@ -8,6 +8,7 @@ using UnityEngine;
  */
 public class Spawner : MonoBehaviour
 {
+
     [SerializeField]
     private GameObject dom = null;//Dom Poziom1
     [SerializeField]
@@ -30,10 +31,14 @@ public class Spawner : MonoBehaviour
     protected Zasoby zasoby_gracza = null; //Odnośnik do obiektu przechowującego 
     protected Map map = null;
     protected Field activeField = null; 
+
+    public Dictionary<string, Budynek.BudynekToSave> budynki = null;//przechowuje dane budynków potrzebne do zapisu
+
     private void Start()
     {
         zasoby_gracza = GameObject.Find("Player").GetComponent<Player>().zasoby;
         map = GameObject.Find("Map").GetComponent<Map>();
+        budynki = new Dictionary<string,Budynek.BudynekToSave>();
     }
     private void Update()
     {
@@ -71,8 +76,12 @@ public class Spawner : MonoBehaviour
         }
         else if(isDel){
             Debug.Log("Delete");
-            MonoBehaviour.Destroy(map.mapa[pozycja.x, pozycja.y].budynek);
-            map.mapa[pozycja.x, pozycja.y].budynek = null;
+            if (map.mapa[pozycja.x, pozycja.y].budynek != null)
+            {
+                Debug.Log(map.mapa[pozycja.x, pozycja.y].budynek.name + " " + budynki.Remove(map.mapa[pozycja.x, pozycja.y].budynek.name));
+                MonoBehaviour.Destroy(map.mapa[pozycja.x, pozycja.y].budynek);
+                map.mapa[pozycja.x, pozycja.y].budynek = null;
+            }
         }
         else if(map.mapa[pozycja.x, pozycja.y].posiadaBudynek())
         {
@@ -89,12 +98,17 @@ public class Spawner : MonoBehaviour
             {
                 if (active.GetComponent<Budynek>().finder.znajdź(pozycja))
                 {
+                    
                     var budynek = MonoBehaviour.Instantiate(active);
                     budynek.transform.position = map.getPositionOfPole(pozycja);
                     zasoby_gracza.subWithPieniadze(zasobyDoOdjęciaNaStart);
                     map.mapa[pozycja.x, pozycja.y].canBuild = false;
                     map.mapa[pozycja.x, pozycja.y].budynek = budynek;
                     budynek.GetComponent<Budynek>().pozycjaNaMapie = pozycja;
+                    budynek.name = budynek.name + " " +pozycja.x +","+ pozycja.y;
+                    Budynek.BudynekToSave bud = new Budynek.BudynekToSave(budynek.GetComponent<Budynek>());
+                    Debug.Log(budynek.name+"addToList");
+                    budynki.Add(budynek.name, bud);
                     return true;
                 }
             }

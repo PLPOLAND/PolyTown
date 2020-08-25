@@ -100,6 +100,26 @@ public class Budynek : MonoBehaviour
             }
         }
     }
+    public class BudynekToSave
+    {
+        float maxPojemnosc;
+        float drewno;
+        float woda;
+        float jagody;
+        int pozycjaNaMapieX;
+        int pozycjaNaMapieY;
+        BudynekType typ = BudynekType.NONE;
+
+        public BudynekToSave(Budynek b){
+            maxPojemnosc = b.magazynWewnetrzny.getPojemnosc();
+            drewno = b.magazynWewnetrzny.getDrewno();
+            woda = b.magazynWewnetrzny.getWoda();
+            jagody = b.magazynWewnetrzny.getJagody();
+            pozycjaNaMapieX = b.pozycjaNaMapie.x;
+            pozycjaNaMapieY = b.pozycjaNaMapie.y;
+            typ = b.typ;
+        }
+    }
 }
 
 public enum BudynekType
