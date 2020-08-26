@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System;
 using UnityEngine;
 
 public class Budynek : MonoBehaviour
@@ -100,7 +102,8 @@ public class Budynek : MonoBehaviour
             }
         }
     }
-    public class BudynekToSave
+    [System.Serializable]
+    public class BudynekToSave : ISerializable
     {
         float maxPojemnosc;
         float drewno;
@@ -118,6 +121,27 @@ public class Budynek : MonoBehaviour
             pozycjaNaMapieX = b.pozycjaNaMapie.x;
             pozycjaNaMapieY = b.pozycjaNaMapie.y;
             typ = b.typ;
+        }
+        public void SaveData(SerializationInfo info, StreamingContext ctxt)
+        {
+            this.maxPojemnosc = (float)info.GetValue("maxPojemnosc", typeof(float));
+            this.drewno = (float)info.GetValue("drewno", typeof(float));
+            this.woda = (float)info.GetValue("woda", typeof(float));
+            this.jagody = (float)info.GetValue("jagody", typeof(float));
+            this.pozycjaNaMapieX = (int)info.GetValue("pozycjaNaMapieX", typeof(float));
+            this.pozycjaNaMapieY = (int)info.GetValue("pozycjaNaMapieY", typeof(float));
+            this.typ = (BudynekType)info.GetValue("typ", typeof(BudynekType));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            info.AddValue("maxPojemnosc", this.maxPojemnosc);
+            info.AddValue("drewno", this.drewno);
+            info.AddValue("woda", this.woda);
+            info.AddValue("jagody", this.jagody);
+            info.AddValue("pozycjaNaMapieX", this.pozycjaNaMapieX);
+            info.AddValue("pozycjaNaMapieY", this.pozycjaNaMapieY);
+            info.AddValue("typ", this.typ);
         }
     }
 }

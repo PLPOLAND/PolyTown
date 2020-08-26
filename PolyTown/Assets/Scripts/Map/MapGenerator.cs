@@ -9,10 +9,13 @@ public class MapGenerator
     System.Random r;
 
     public MapGenerator(){//ziarno losowe
-        r = new System.Random((int)DateTime.Now.Ticks);
+        int seed = (int)DateTime.Now.Ticks;
+        r = new System.Random(seed);
+        GameObject.Find("SaveMenager").GetComponent<SaveSystem>().saveData.seed = seed;
     }
     public MapGenerator(int i){//ustalone ziarno
         r = new System.Random(i);
+        GameObject.Find("SaveMenager").GetComponent<SaveSystem>().saveData.seed = i;
     }
 
     private List<FieldType> fields;
