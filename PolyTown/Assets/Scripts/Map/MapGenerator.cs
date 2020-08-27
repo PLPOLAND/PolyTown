@@ -35,20 +35,26 @@ public class MapGenerator
     /// <param name="size">Rozmiar mapy</param>
     public void generate(Pole[,] map, Vector2Int size)
     {
-
+        if (GameObject.Find("SaveMenager").GetComponent<SaveSystem>().shouldLoad == true)
+        {
+            return;
+        }
         Vector2Int pos = new Vector2Int(-(size.x / 2) * 4, -(size.y / 2) * 4);//pozycja początkowa
+        var parent = GameObject.Find("Map").transform;
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
             {
                 Pole nowepole = new Pole(MonoBehaviour.Instantiate(fields[0].mesh),fields[0].type, fields[0].canBeBuild,pos,new Vector2Int(i,j), i + " " + j, 9);
+                Debug.Log("Stworzono nowe Pole " + i +" " + j);
                 map[i, j] = nowepole;
-                nowepole.mesh.transform.SetParent(GameObject.Find("Map").transform);
+                nowepole.mesh.transform.SetParent(parent);
                 pos.y += 4;
             }
             pos.y = -(size.y / 2) * 4;
             pos.x += 4;
         }
+        Debug.Log("Stworzono wszystkie nowe pola trawy, rozpoczynanie tworzenia linków");
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
@@ -71,18 +77,19 @@ public class MapGenerator
                 }
             }
         }
+        Debug.Log("Skończono tworzenie linków między polami");
         for (int i = 1; i < fields.Count; i++)
         {
             while (fields[i].maxIlosc >= 5)
             {
                 generateIsland(fields[i], map, size, new Vector2Int(r.Next(1,size.x-1), r.Next(1,size.y)-1));
             }   
-
         }
 
     }
     void generateIsland(FieldType field, Pole[,] mapa,Vector2Int mapSize, Vector2Int startPos)
     {
+        Debug.Log("Generowanie wyspy " + field.type.ToString());
         var poleS = mapa[startPos.x,startPos.y];
         Queue<Pole> pola = new Queue<Pole>();
         pola.Enqueue(poleS);

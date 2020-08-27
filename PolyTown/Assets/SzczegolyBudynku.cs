@@ -11,6 +11,8 @@ public class SzczegolyBudynku : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI nazwa_link = null;
     [SerializeField]
+    TextMeshProUGUI nazwaMagazynu_link = null;
+    [SerializeField]
     Image ikona = null;
     Zasoby magazynWewnetrzny = null;
     Zasoby magazynUsera = null;
@@ -36,10 +38,19 @@ public class SzczegolyBudynku : MonoBehaviour
         }
     }
 
-    void setToShow(SzczegolyBudynkuPack szczegoly, Zasoby magazynwew){
-        nazwa_link.text = szczegoly.nazwa;
-        ikona.sprite = szczegoly.ikona;
-        magazynWewnetrzny = magazynwew;
+    void setToShow(SzczegolyBudynkuPack szczegoly, Zasoby magazynwew, bool czyMagazyn = false){
+        if (!czyMagazyn){
+            nazwa_link.text = szczegoly.nazwa;
+            ikona.sprite = szczegoly.ikona;
+            magazynWewnetrzny = magazynwew;
+            nazwaMagazynu_link.text = "Magazyn Wewnętrzny";
+        }
+        else{
+            nazwa_link.text = szczegoly.nazwa;
+            ikona.sprite = szczegoly.ikona;
+            magazynWewnetrzny = magazynUsera;
+            nazwaMagazynu_link.text = "Magazyn";
+        }
     }
 
     public void onClick(GameObject obj){
@@ -62,7 +73,7 @@ public class SzczegolyBudynku : MonoBehaviour
                 setToShow(rodzaje[4],budynek.magazynWewnetrzny);
                 break;
             case BudynekType.MAGAZYN:
-                setToShow(rodzaje[5],budynek.magazynWewnetrzny);
+                setToShow(rodzaje[5],budynek.magazynWewnetrzny,true);
                 break;
         }
     }

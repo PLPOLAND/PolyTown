@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTime: 15
-  onTimeMagazyn: 5
+  onTimeMagazyn: 2.5
   zasobyCykliczne:
     maxPojemnosc: 0
     drewno: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   doPobraniaZmagazynu:
     maxPojemnosc: 0
     drewno: 0
-    woda: 1
+    woda: 1.5
     jagody: 0
     pieniadze: 0
   czyPobieraZasoby: 0

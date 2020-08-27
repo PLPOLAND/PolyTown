@@ -34,16 +34,22 @@ public class Map : MonoBehaviour
         {
             for (int j = 0; j < mapa.GetUpperBound(1) + 1; j++)
             {
-                MonoBehaviour.Destroy(mapa[i, j].mesh);//usuwanie meshy
+                if (mapa[i, j] !=null)
+                {
+                    MonoBehaviour.Destroy(mapa[i, j].mesh);//usuwanie meshy
+                }
             }
         }
+        Debug.Log("Zniszczono poprzednia mapę");
         mapa = new Pole[sizeX,sizeY];
         MapGenerator generator = new MapGenerator(seed);
         generator.init();
         generator.addField(Pole.type.LAKA, ref laka, szansaLaki, iloscLaki, true);
         generator.addField(Pole.type.LAS, ref las, szansaLasu, iloscLasu, false);
         generator.addField(Pole.type.GORY, ref gory, szansaGory, iloscGor, false);
+        Debug.Log("Rozpoczynam Generowanie Mapy");
         generator.generate(mapa, rozmiar);
+        Debug.Log("Zakończono Generowanie Mapy");
     }
     public Vector3 getPositionOfPole(Vector2Int pos){
         return mapa[pos.x , pos.y].mesh.transform.position;

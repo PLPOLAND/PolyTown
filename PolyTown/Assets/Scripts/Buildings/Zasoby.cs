@@ -196,12 +196,31 @@ public class Zasoby
     /// </summary>
     public void subWithPieniadze(Zasoby zasobySub)
     {
+        subPojemnosc(zasobySub.maxPojemnosc);
         subDrewno(zasobySub.drewno);
         subWoda(zasobySub.woda);
         subJagody(zasobySub.jagody);
         subPieniadze(zasobySub.pieniadze);
     }
 
+    public bool isOkToSubDrewno(Zasoby zasobySub){
+        bool ok = true;
+        if (drewno - zasobySub.drewno < 0)
+            ok = false;
+        return ok;
+    }
+    public bool isOkToSubWoda(Zasoby zasobySub){
+        bool ok = true;
+        if (woda - zasobySub.woda < 0)
+            ok = false;
+        return ok;
+    }
+    public bool isOkToSubJagody(Zasoby zasobySub){
+        bool ok = true;
+        if (jagody - zasobySub.jagody < 0)
+            ok = false;
+        return ok;
+    }
     public bool isOkToSub(Zasoby zasobySub){
         bool ok = true;
         if (drewno - zasobySub.drewno < 0)
@@ -242,12 +261,22 @@ public class Zasoby
         }
     }
 
-    public bool isOkToAdd(Zasoby zasobyAdd){
+    public bool isOkToAddDrewno(Zasoby zasobyAdd){
         bool ok = true;
         if (drewno + zasobyAdd.drewno > maxPojemnosc)
             ok = false;
+        return ok;
+
+    }
+    public bool isOkToAddWoda(Zasoby zasobyAdd){
+        bool ok = true;
         if (woda + zasobyAdd.woda > maxPojemnosc)
             ok = false;
+        return ok;
+
+    }
+    public bool isOkToAddJagody(Zasoby zasobyAdd){
+        bool ok = true;
         if (jagody + zasobyAdd.jagody > maxPojemnosc)
             ok = false;
         return ok;

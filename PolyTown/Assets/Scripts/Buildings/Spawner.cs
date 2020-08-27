@@ -70,7 +70,6 @@ public class Spawner : MonoBehaviour
     }
     public void onClick(Vector2Int pozycja)
     {
-        Debug.Log(isDel);
         if(isSpawn){
             spawn(pozycja);
         }
@@ -78,9 +77,10 @@ public class Spawner : MonoBehaviour
             Debug.Log("Delete");
             if (map.mapa[pozycja.x, pozycja.y].budynek != null)
             {
-                Debug.Log(map.mapa[pozycja.x, pozycja.y].budynek.name + " " + budynki.Remove(map.mapa[pozycja.x, pozycja.y].budynek.name));
+                budynki.Remove(map.mapa[pozycja.x, pozycja.y].budynek.name);
                 MonoBehaviour.Destroy(map.mapa[pozycja.x, pozycja.y].budynek);
                 map.mapa[pozycja.x, pozycja.y].budynek = null;
+                map.mapa[pozycja.x, pozycja.y].canBuild = true;
             }
         }
         else if(map.mapa[pozycja.x, pozycja.y].posiadaBudynek())
@@ -218,5 +218,50 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    public void load(Dictionary<string, Budynek.BudynekToSave> budynkiIn){
+        foreach (var i in budynkiIn)
+        {
+            Budynek.BudynekToSave bud = i.Value;
+            bool okToBuild = map.mapa[bud.pozycjaNaMapieX, bud.pozycjaNaMapieY].canBuild;
+            if (okToBuild)
+            {
+                
+                GameObject budynek;
+                switch (bud.typ)
+                {
+                    case BudynekType.DOM:
+                        budynek = MonoBehaviour.Instantiate(dom);
+                        break;
+                    case BudynekType.DRWAL:
+                        budynek = MonoBehaviour.Instantiate(drwal);
+                        break;
+                    case BudynekType.ZBIERACZEJAGOD:
+                        budynek = MonoBehaviour.Instantiate(jagody);
+                        break;
+                    case BudynekType.STUDNIA:
+                        budynek = MonoBehaviour.Instantiate(woda);
+                        break;
+                    case BudynekType.CENTRUM:
+                        budynek = MonoBehaviour.Instantiate(centurm);
+                        break;
+                    case BudynekType.MAGAZYN:
+                        budynek = MonoBehaviour.Instantiate(magazyn);
+                        break;
+                    default:
+                        budynek = MonoBehaviour.Instantiate(dom);
+                        break;
+                }
+                var pozycja = new Vector2Int(bud.pozycjaNaMapieX, bud.pozycjaNaMapieY);
+                budynek.transform.position = map.getPositionOfPole(pozycja);
+                map.mapa[pozycja.x, pozycja.y].canBuild = false;
+                map.mapa[pozycja.x, pozycja.y].budynek = budynek;
+                budynek.GetComponent<Budynek>().pozycjaNaMapie = pozycja;
+                budynek.name = i.Key;
+                Budynek.BudynekToSave bud1 = new Budynek.BudynekToSave(budynek.GetComponent<Budynek>());
+                Debug.Log(budynek.name + "addToList");
+                budynki.Add(budynek.name, bud);
+            }
+        }
+    }
 
 }

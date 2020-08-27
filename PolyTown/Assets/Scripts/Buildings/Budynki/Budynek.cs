@@ -16,7 +16,7 @@ public class Budynek : MonoBehaviour
     public Zasoby zasobyPoczątkowe;//zasoby pobierane podczas stawiania budynku
     protected float timer = 0f;
     protected float timerCzynsz = 0f;
-    protected float timerMagazyn = 0f;
+    public float timerMagazyn = 0f;
     protected Zasoby zasobyGraczaLink;
 
     [SerializeField]
@@ -77,11 +77,31 @@ public class Budynek : MonoBehaviour
         if (timerMagazyn >= onTimeMagazyn)
         {
             timerMagazyn = 0;
-            if (zasobyGraczaLink.isOkToAdd(doPobraniaZmagazynu) && magazynWewnetrzny.isOkToAdd(doPobraniaZmagazynu))
+            switch (this.typ)
             {
-                zasobyGraczaLink.add(doPobraniaZmagazynu);
-                magazynWewnetrzny.subNPojemnosc(doPobraniaZmagazynu);
+                case BudynekType.DRWAL:
+                    if (zasobyGraczaLink.isOkToAddDrewno(doPobraniaZmagazynu) && magazynWewnetrzny.isOkToSubDrewno(doPobraniaZmagazynu))
+                        {
+                            zasobyGraczaLink.add(doPobraniaZmagazynu);
+                            magazynWewnetrzny.subNPojemnosc(doPobraniaZmagazynu);
+                        }
+                    break;
+                case BudynekType.STUDNIA:
+                    if (zasobyGraczaLink.isOkToAddWoda(doPobraniaZmagazynu) && magazynWewnetrzny.isOkToSubWoda(doPobraniaZmagazynu))
+                        {
+                            zasobyGraczaLink.add(doPobraniaZmagazynu);
+                            magazynWewnetrzny.subNPojemnosc(doPobraniaZmagazynu);
+                        }
+                    break;
+                case BudynekType.ZBIERACZEJAGOD:
+                    if (zasobyGraczaLink.isOkToAddJagody(doPobraniaZmagazynu) && magazynWewnetrzny.isOkToSubJagody(doPobraniaZmagazynu))
+                        {
+                            zasobyGraczaLink.add(doPobraniaZmagazynu);
+                            magazynWewnetrzny.subNPojemnosc(doPobraniaZmagazynu);
+                        }
+                    break;
             }
+            
         }
     }
 
@@ -105,13 +125,13 @@ public class Budynek : MonoBehaviour
     [System.Serializable]
     public class BudynekToSave : ISerializable
     {
-        float maxPojemnosc;
-        float drewno;
-        float woda;
-        float jagody;
-        int pozycjaNaMapieX;
-        int pozycjaNaMapieY;
-        BudynekType typ = BudynekType.NONE;
+        public float maxPojemnosc;
+        public float drewno;
+        public float woda;
+        public float jagody;
+        public int pozycjaNaMapieX;
+        public int pozycjaNaMapieY;
+        public BudynekType typ = BudynekType.NONE;
 
         public BudynekToSave(Budynek b){
             maxPojemnosc = b.magazynWewnetrzny.getPojemnosc();
@@ -122,14 +142,14 @@ public class Budynek : MonoBehaviour
             pozycjaNaMapieY = b.pozycjaNaMapie.y;
             typ = b.typ;
         }
-        public void SaveData(SerializationInfo info, StreamingContext ctxt)
+        public BudynekToSave(SerializationInfo info, StreamingContext ctxt)
         {
             this.maxPojemnosc = (float)info.GetValue("maxPojemnosc", typeof(float));
             this.drewno = (float)info.GetValue("drewno", typeof(float));
             this.woda = (float)info.GetValue("woda", typeof(float));
             this.jagody = (float)info.GetValue("jagody", typeof(float));
-            this.pozycjaNaMapieX = (int)info.GetValue("pozycjaNaMapieX", typeof(float));
-            this.pozycjaNaMapieY = (int)info.GetValue("pozycjaNaMapieY", typeof(float));
+            this.pozycjaNaMapieX = (int)info.GetValue("pozycjaNaMapieX", typeof(int));
+            this.pozycjaNaMapieY = (int)info.GetValue("pozycjaNaMapieY", typeof(int));
             this.typ = (BudynekType)info.GetValue("typ", typeof(BudynekType));
         }
 

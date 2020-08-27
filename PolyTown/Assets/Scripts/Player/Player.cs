@@ -11,11 +11,15 @@ public class Player : MonoBehaviour
 {
 
     public Zasoby zasoby; // zasoby gracza
-    public float pieniadze = 75000;
     public bool pause = false; // czy Gra jest zapauzowana
 
     private void Start() {
         pause = false;
+        GameObject.Find("SaveMenager").GetComponent<SaveSystem>().tryToLoad();
+    }
+
+    public void load(Player p){
+        this.zasoby = p.zasoby;
     }
     [Serializable]
     public class PlayerToSave : ISerializable{
@@ -25,7 +29,10 @@ public class Player : MonoBehaviour
         float jagody;
         float pieniadze;
 
-        public void SaveData(SerializationInfo info, StreamingContext ctxt)
+        public PlayerToSave(){
+
+        }
+        public PlayerToSave(SerializationInfo info, StreamingContext ctxt)
         {
             this.pieniadze = (float)info.GetValue("pieniadze", typeof(float));
             this.maxPojemnosc = (float)info.GetValue("maxPojemnosc", typeof(float));
@@ -43,9 +50,8 @@ public class Player : MonoBehaviour
             info.AddValue("jagody", this.jagody);
         }
 
-        public Player toPlayer(){
-            Player p = new Player();
-            p.pieniadze = this.pieniadze;
+        public Player toPlayer(Player p){
+            p.zasoby.setPieniadze(this.pieniadze);
             p.zasoby.setDrewno(this.drewno); 
             p.zasoby.setWoda(this.woda); 
             p.zasoby.setJagody(this.jagody); 
@@ -53,7 +59,7 @@ public class Player : MonoBehaviour
             return p;
         }
         public void fromPlayer(Player p){
-            this.pieniadze = p.pieniadze;
+            this.pieniadze = p.zasoby.getPieniadze();
             this.maxPojemnosc = p.zasoby.getPojemnosc();
             this.drewno = p.zasoby.getDrewno();
             this.woda = p.zasoby.getWoda();

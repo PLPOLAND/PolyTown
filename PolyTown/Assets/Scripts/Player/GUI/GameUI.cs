@@ -72,11 +72,11 @@ public class GameUI : MonoBehaviour
         }
         if (zasoby.getPieniadze() < 0)
         {
-            drewnoVal.color = new Color(1, 0, 0);
+            pieniadzeVal.color = new Color(1, 0, 0);
         }
         else
         {
-            drewnoVal.color = new Color(1, 1, 1);
+            pieniadzeVal.color = new Color(1, 1, 1);
         }
     }
     public void gamePause(){
